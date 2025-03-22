@@ -1,0 +1,165 @@
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+}
+
+/* Dashboard Layout */
+.dashboard-container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 250px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar .admin-profile {
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #a200ff;
+}
+
+.sidebar .admin-profile img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.sidebar .admin-profile h3 {
+    margin: 5px 0;
+    font-size: 18px;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar nav ul li {
+    padding: 12px 15px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+
+.sidebar nav ul li:hover {
+    background-color: #a200ff;
+}
+
+.sidebar nav ul li.active {
+    background-color: #1abc9c;
+}
+
+/* Logout Button */
+.logout-btn {
+    width: 100%;
+    padding: 15px;
+    background: #d9534f;
+    color: white;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 20px;
+}
+
+.logout-btn:hover {
+    background: #c9302c;
+}
+
+/* Main Content */
+.dashboard-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: white;
+    overflow-y: auto;
+}
+
+.dashboard-content h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* User Management Section */
+.user-management {
+    display: flex;
+    gap: 20px;
+}
+
+.user-management button {
+    padding: 10px 15px;
+    border: none;
+    background-color: #1abc9c;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.user-management button:hover {
+    background-color: #16a085;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #2c3e50;
+    color: white;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Buttons inside tables */
+button {
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button.edit {
+    background-color: #3498db;
+    color: white;
+}
+
+button.remove {
+    background-color: #e74c3c;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+
