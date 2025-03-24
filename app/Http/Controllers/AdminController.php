@@ -16,7 +16,7 @@ class AdminController extends Controller
     }
 
     public function manageUsers() {
-        return view('admin.users.users'); // ✅ loads the tab view
+        return view('admin.users'); // ✅ loads the tab view
     }
 
     // 📌 LOAD GUIDES
@@ -26,33 +26,51 @@ class AdminController extends Controller
     }
 
     // 📌 ADD GUIDE
-    public function addGuide(Request $request) {
+
+
+    public function addGuide(Request $request)
+    {
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => 'required|string|min:6',
+            'location' => 'required|string',
+            'profile_picture' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
-
+    
+        // Create User
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => 'guide',
         ]);
-
+    
+        if (!$user) {
+            return response()->json(['error' => 'User creation failed'], 500);
+        }
+    
+        // Upload image
+        $profilePicPath = $request->file('profile_picture')->store('guide_images', 'public');
+    
+        // Create Guide
         Guide::create([
             'user_id' => $user->id,
-            'experience' => $request->experience,
-            'certification' => $request->certification,
-            'specialties' => json_encode($request->specialties),
+            'location' => $request->location,
+            'profile_picture' => $profilePicPath,
+            'experience' => 'To be updated',
+            'certification' => 'To be updated',
+            'specialties' => 'To be updated',
         ]);
-
-        if ($request->expectsJson()) {
-            return response()->json(['message' => 'Guide added successfully']);
-        } else {
-            return redirect()->route('admin.guides')->with('success', 'Guide added successfully');
-        }
+    
+        return redirect()->route('admin.guides')->with('success', 'Guide added successfully!');
     }
+    
+
+
+
+
+
 
     // 📌 DELETE GUIDE
     public function deleteGuide($id) {
@@ -91,4 +109,12 @@ public function getTouristCount()
     return response()->json(['total' => $total]);
 }
 
+
+//to load profile 
+
+public function profile()
+{
+    return view('admin.profile');
 }
+}
+

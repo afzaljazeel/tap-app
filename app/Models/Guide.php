@@ -9,7 +9,14 @@ class Guide extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'experience', 'certification', 'specialties'];
+    protected $fillable = [
+        'user_id',
+        'location',
+        'profile_picture',
+        'experience',
+        'certification',
+        'specialties'
+    ];
 
     // Define relationship with User
     public function user()

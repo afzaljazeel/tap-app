@@ -1,17 +1,17 @@
-<h2>Manage Users</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>manage users Dashboard</title>
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+</head>
+<body>
 
-<div class="stats-container" style="display: flex; gap: 20px; margin-bottom: 20px;">
-    <div class="stat-box" style="background: #f0f0f0; padding: 20px; border-radius: 10px;">
-        <h3>Total Guides</h3>
-        <p id="guide-count">...</p>
-    </div>
-    <div class="stat-box" style="background: #f0f0f0; padding: 20px; border-radius: 10px;">
-        <h3>Total Tourists</h3>
-        <p id="tourist-count">...</p>
-    </div>
-</div>
 
-<div>
+<h2 class="manage-users-header">Manage Users</h2>
+
+<div class="user-type-buttons">
     <button onclick="loadGuideList()">Guides</button>
     <button onclick="loadTouristList()">Tourists</button>
 </div>
@@ -44,11 +44,8 @@
                 document.getElementById('user-list').innerHTML = "<p>Failed to load tourists.</p>";
             });
     }
-</script>
 
-<script>
     document.addEventListener("DOMContentLoaded", function () {
         loadGuideList(); // triggers on page load
     });
 </script>
-

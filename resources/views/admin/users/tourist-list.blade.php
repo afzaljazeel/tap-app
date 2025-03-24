@@ -1,3 +1,5 @@
+<div class="user-section">
+
 <h3>Tourists</h3>
 
 <table>
@@ -26,3 +28,5 @@
         @endforeach
     </tbody>
 </table>
+
+</div>
