@@ -23,8 +23,6 @@
 </body>
 
 
-
-
 <script>
     function loadGuideList() {
         document.getElementById('user-list').innerHTML = "<p>Loading Guides...</p>";
