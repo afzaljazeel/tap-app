@@ -1,5 +1,7 @@
 <div class="user-section">
 
+
+
 <h3>Guides</h3>
 
 <!-- Add Guide Button -->
@@ -19,6 +21,13 @@
     <button type="submit">Add Guide</button>
     </form>
 </div>
+
+{{-- ✅ Flash Success Message --}}
+    @if (session('success'))
+        <div style="background-color: #d4edda; color: #155724; padding: 12px 20px; border-radius: 6px; margin-bottom: 20px; border: 1px solid #c3e6cb;">
+            {{ session('success') }}
+        </div>
+    @endif
 
 <!-- Guides Table -->
 <table style="margin-top: 20px;">

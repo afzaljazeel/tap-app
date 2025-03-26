@@ -30,6 +30,8 @@ class AdminController extends Controller
 
     public function addGuide(Request $request)
     {
+        
+
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
@@ -45,6 +47,8 @@ class AdminController extends Controller
             'password' => Hash::make($request->password),
             'role' => 'guide',
         ]);
+
+
     
         if (!$user) {
             return response()->json(['error' => 'User creation failed'], 500);
@@ -54,7 +58,7 @@ class AdminController extends Controller
         $profilePicPath = $request->file('profile_picture')->store('guide_images', 'public');
     
         // Create Guide
-        Guide::create([
+        $guide = Guide::create([
             'user_id' => $user->id,
             'location' => $request->location,
             'profile_picture' => $profilePicPath,
@@ -62,8 +66,9 @@ class AdminController extends Controller
             'certification' => 'To be updated',
             'specialties' => 'To be updated',
         ]);
+        
     
-        return redirect()->route('admin.guides')->with('success', 'Guide added successfully!');
+        return redirect()->route('admin.users')->with('success', 'Guide added successfully!');
     }
     
 
