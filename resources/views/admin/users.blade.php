@@ -20,6 +20,11 @@
     <p>Select a category to view users.</p>
 </div>
 
+</body>
+
+
+
+
 <script>
     function loadGuideList() {
         document.getElementById('user-list').innerHTML = "<p>Loading Guides...</p>";
