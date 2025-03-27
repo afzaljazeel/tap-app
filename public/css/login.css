@@ -231,7 +231,15 @@
 .signup-link {
     font-size: 14px;
     font-family: 'League Spartan', sans-serif;
+    white-space: nowrap;
+    /*  Prevent line break */
+    display: flex;
+    /*  Keep items side-by-side */
+    align-items: center;
+    gap: 5px;
+    /* Add small spacing between text and link */
 }
+
 
 /* Add more space between "Join" and "Sign in With Google" */
 .signup-link a {
