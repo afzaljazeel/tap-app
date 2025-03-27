@@ -1,30 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navigation</title>
-
-    <!-- Link to Normal CSS -->
-    <link rel="stylesheet" href="{{ asset('css/navigation.css') }}">
-</head>
-<body>
-
 <nav class="navbar">
-    <div class="container">
-        
-        <!-- Logo -->
-        <div class="logo">
+    <div class="nav-container">
+        <!-- Left: Logo -->
+        <div class="nav-logo">
             <a href="{{ route('home') }}">
-                <img src="{{ asset('img/logo.png') }}" alt="Logo">
+                <link rel="stylesheet" href="{{ asset('css/navigation.css') }}">
+                <img src="{{ asset('img/logo_high_res.png') }}" alt="Logo">
             </a>
         </div>
 
-        <!-- Mobile Menu Icon -->
-        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-
-        <!-- Navigation Links -->
-        <ul class="nav-links">
+        <!-- Center: Nav Links -->
+        <ul class="nav-links" id="navLinks">
             <li><a href="{{ route('home') }}">Home</a></li>
             <li><a href="{{ route('about') }}">About</a></li>
             <li><a href="{{ route('guides') }}">Guides</a></li>
@@ -36,20 +21,19 @@
                 @elseif(Auth::user()->role === 'guide')
                     <li><a href="{{ route('guide.dashboard') }}">Guide Dashboard</a></li>
                 @else
-                    <li><a href="{{ route('home') }}">Dashboard</a></li> <!-- Tourists go to Home -->
+                    <li><a href="{{ route('home') }}">Dashboard</a></li>
                 @endif
             @endauth
         </ul>
 
-        <!-- User Profile Dropdown -->
+        <!-- Right: Profile Icon -->
         @auth
-        <div class="user-menu">
+        <div class="user-menu" id="userMenu">
             <button id="user-btn">
-                <img src="{{ asset('img/profile-icon.png') }}" alt="Profile" class="profile-icon">
+                <img src="{{ asset('img/profile_icon.png') }}" alt="Profile" class="profile-icon">
             </button>
             <div class="dropdown">
                 <a href="{{ route('profile.edit') }}">Profile</a>
-                
                 @if(Auth::user()->role === 'admin')
                     <a href="{{ route('admin.dashboard') }}">Admin Dashboard</a>
                 @elseif(Auth::user()->role === 'guide')
@@ -57,7 +41,6 @@
                 @else
                     <a href="{{ route('home') }}">Dashboard</a>
                 @endif
-                
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit">Log Out</button>
@@ -65,25 +48,21 @@
             </div>
         </div>
         @endauth
+
+        <!-- Hamburger (mobile only) -->
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
     </div>
 </nav>
 
-<!-- JavaScript for Dropdown & Mobile Menu -->
 <script>
-    document.getElementById("user-btn").addEventListener("click", function() {
-        document.querySelector(".dropdown").classList.toggle("show");
-    });
-
     function toggleMenu() {
-        document.querySelector(".nav-links").classList.toggle("show");
-    }
+        const navLinks = document.getElementById('navLinks');
+        const userMenu = document.getElementById('userMenu');
 
-    window.onclick = function(event) {
-        if (!event.target.matches('#user-btn')) {
-            document.querySelector(".dropdown").classList.remove("show");
+        navLinks.classList.toggle('show');
+
+        if (userMenu) {
+            userMenu.style.display = navLinks.classList.contains('show') ? 'flex' : 'none';
         }
-    };
+    }
 </script>
-
-</body>
-</html>
