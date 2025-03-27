@@ -1,0 +1,158 @@
+/* Forgot Password Page Styling (login UI) */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,
+html {
+    font-family: 'League Spartan', sans-serif;
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background: url("../img/login.jpg") no-repeat center center/cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.login-page::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: inherit;
+    filter: blur(8px);
+    z-index: -1;
+}
+
+.login-container {
+    background: white;
+    padding: 40px;
+    width: 450px;
+    border-radius: 15px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.login-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.logo-img {
+    width: 110px;
+}
+
+.close-btn {
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+}
+
+.login-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.login-description {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.form-control {
+    margin-bottom: 15px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.form-control label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.form-control input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.login-btn {
+    background: #10B981;
+    /* Forest Green */
+    color: white;
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background 0.3s ease-in-out;
+}
+
+.login-btn:hover {
+    background: #059669;
+    /* Deeper green on hover */
+}
+
+
+
+
+/* Mobile Fix */
+@media (max-width: 600px) {
+    .login-container {
+        width: 90%;
+        padding: 30px;
+    }
+
+    .logo-img {
+        width: 80px;
+    }
+
+    .login-title {
+        font-size: 20px;
+    }
+
+    .login-description {
+        font-size: 13px;
+    }
+
+    .login-btn {
+        font-size: 15px;
+        padding: 12px;
+    }
+}
