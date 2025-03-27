@@ -1,7 +1,11 @@
+@php
+    $showSidebar = false;
+@endphp
+
 @extends('layouts.guide')
 
 @section('content')
-<div class="dashboard-content">
+<div class="tour-create-form">
     <h2>Create New Tour</h2>
 
     <form method="POST" action="{{ route('guide.tours.store') }}" enctype="multipart/form-data">
