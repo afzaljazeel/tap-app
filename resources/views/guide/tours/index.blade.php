@@ -1,36 +1,37 @@
+@php
+    $showSidebar = false;
+@endphp
+
 @extends('layouts.guide')
 
 @section('content')
 <div class="dashboard-content">
     <h2>Your Created Tours</h2>
 
-    <a href="{{ route('guide.tours.create') }}" class="btn btn-success">+ Create New Tour</a>
-
     @if(session('success'))
-        <p style="color: green;">{{ session('success') }}</p>
+        <div class="success-message">{{ session('success') }}</div>
     @endif
 
-    <table>
-        <thead>
-            <tr>
-                <th>Tour Name</th>
-                <th>Amount</th>
-                <th>Duration</th>
-                <th>Image</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($tours as $tour)
-                <tr>
-                    <td>{{ $tour->name }}</td>
-                    <td>${{ $tour->amount }}</td>
-                    <td>{{ $tour->duration }}</td>
-                    <td>
-                        <img src="{{ asset('storage/' . $tour->picture) }}" alt="Tour Image" width="80">
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <div class="tour-actions">
+        <a href="{{ route('guide.tours.create') }}" class="create-tour-btn">+ Create New Tour</a>
+    </div>
+
+    <div class="tour-grid">
+        @foreach ($tours as $tour)
+            <div class="tour-card">
+                <img src="{{ asset('storage/' . $tour->picture) }}" alt="Tour Image">
+                <div class="tour-info">
+                    <h3>{{ $tour->name }}</h3>
+                    <p><strong>Amount:</strong> ${{ $tour->amount }}</p>
+                    <p><strong>Duration:</strong> {{ $tour->duration }}</p>
+                    <form method="POST" action="#">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="delete-btn">Delete</button>
+                    </form>
+                </div>
+            </div>
+        @endforeach
+    </div>
 </div>
 @endsection

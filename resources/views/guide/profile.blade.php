@@ -1,3 +1,7 @@
+@php
+    $showSidebar = false;
+@endphp
+
 @extends('layouts.guide')
 
 @section('content')

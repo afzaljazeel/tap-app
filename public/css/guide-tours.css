@@ -1,0 +1,210 @@
+.dashboard-content {
+    padding: 30px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.success-message {
+    color: #2ecc71;
+    background: #eafaf1;
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.tour-actions {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.create-tour-btn {
+    padding: 10px 20px;
+    background-color: #1abc9c;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.create-tour-btn:hover {
+    background-color: #16a085;
+}
+
+.tour-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.tour-card {
+    background-color: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.tour-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.tour-info {
+    padding: 15px;
+}
+
+.tour-info h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.tour-info p {
+    margin: 4px 0;
+    color: #555;
+}
+
+.delete-btn {
+    margin-top: 12px;
+    padding: 8px 12px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+}
+
+
+.tour-create-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.tour-create-form h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #2c3e50;
+}
+
+.tour-create-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.tour-create-form input[type="text"],
+.tour-create-form input[type="number"],
+.tour-create-form input[type="file"],
+.tour-create-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.tour-create-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.tour-create-form button {
+    background-color: #1abc9c;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.tour-create-form button:hover {
+    background-color: #16a085;
+}
+
+
+
+/* Guide Profile Section */
+.guide-profile-section {
+    max-width: 700px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.guide-profile-section h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 26px;
+    color: #333;
+}
+
+.guide-profile-section .form-row {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.guide-profile-section label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #2c3e50;
+}
+
+.guide-profile-section input[type="text"],
+.guide-profile-section input[type="email"],
+.guide-profile-section input[type="password"],
+.guide-profile-section input[type="file"],
+.guide-profile-section textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.guide-profile-section small {
+    font-weight: normal;
+    color: #888;
+}
+
+.save-btn {
+    padding: 12px 20px;
+    background-color: #1abc9c;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.save-btn:hover {
+    background-color: #16a085;
+}
+
+hr {
+    margin: 30px 0;
+    border: none;
+    border-top: 1px solid #eee;
+}

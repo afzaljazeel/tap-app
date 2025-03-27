@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guide Dashboard</title>
     <link rel="stylesheet" href="{{ asset('css/guide-dashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/guide-tours.css') }}">
+
 </head>
 <body>
 
+
     <div class="dashboard-container">
         <!-- Sidebar -->
+        @if (!isset($showSidebar) || $showSidebar)
         <aside class="sidebar">
             <div class="guide-profile">
                 <img src="{{ asset('img/profile-placeholder.png') }}" alt="Guide Avatar">
@@ -34,9 +38,13 @@
                 </form>
             </nav>
         </aside>
+        @endif
 
         <!-- Main Content -->
         <main class="dashboard-content">
+        @if (isset($showSidebar) && !$showSidebar)
+            @include('layouts.navigation')
+        @endif
             @yield('content')
         </main>
     </div>
