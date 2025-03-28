@@ -83,7 +83,7 @@ class AdminController extends Controller
         $user->delete();
         Guide::where('user_id', $id)->delete();
 
-        return response()->json(['message' => 'Guide removed successfully']);
+        return redirect()->route('admin.users')->with('success', 'Guide removed successfully!');
     }
 
     // 📌 LOAD TOURISTS
@@ -98,7 +98,7 @@ class AdminController extends Controller
         $user->delete();
         Tourist::where('user_id', $id)->delete();
 
-        return response()->json(['message' => 'Tourist removed successfully']);
+        return redirect()->route('admin.users')->with('success', 'Tourist removed successfully!');
     }
     // 📌 COUNT GUIDES
     public function getGuideCount()
