@@ -40,12 +40,14 @@ html {
 .signup-container {
     display: flex;
     background: white;
-    width: 1000px;
+    max-width: 950px;
+    width: 95%;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 2;
     position: relative;
+    margin: 0 auto;
 }
 
 /* Header (Logo + Close) */
@@ -75,16 +77,17 @@ html {
 
 /* Left Illustration */
 .signup-illustration {
-    width: 70%;
+    width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0px 0px;
+    padding: 0;
     background: #fff;
 }
 
 .signup-illustration img {
-    max-width: 100%;
+    width: 100%;
+    height: auto;
     max-height: 900px;
     object-fit: contain;
 }
@@ -92,7 +95,7 @@ html {
 /* Right Form Area */
 .signup-form {
     width: 50%;
-    padding: 100px 40px 40px;
+    padding: 60px 40px;
     background: white;
     display: flex;
     flex-direction: column;
@@ -102,25 +105,9 @@ html {
 /* Form Title */
 .signup-form h2 {
     font-size: 30px;
-    text-align: left;
     margin-bottom: 25px;
     color: #111;
     line-height: 1.4;
-}
-
-/* Name Fields Side-by-Side */
-.name-fields {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-.name-fields input {
-    flex: 1;
-    padding: 10px 12px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
 }
 
 /* Inputs */
@@ -133,7 +120,6 @@ html {
     border-radius: 6px;
     font-size: 14px;
     margin-bottom: 15px;
-    font-family: 'League Spartan', sans-serif;
 }
 
 /* Password Wrapper */
@@ -229,39 +215,12 @@ html {
         width: 95%;
     }
 
+    .signup-header {
+        padding: 15px 20px;
+    }
+
     .signup-illustration,
     .signup-form {
-        width: 100%;
-    }
-
-    .signup-header {
-        padding: 15px 20px;
-    }
-
-    .signup-form {
-        padding: 40px 20px;
-    }
-
-    .signup-footer {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-}
-
-@media (max-width: 1024px) {
-    .signup-container {
-        flex-direction: column;
-        width: 95%;
-    }
-
-    .signup-header {
-        padding: 15px 20px;
-        position: relative;
-    }
-
-    .signup-form,
-    .signup-illustration {
         width: 100%;
     }
 
@@ -269,89 +228,48 @@ html {
         padding: 40px 30px;
     }
 
-    .signup-illustration img {
-        max-height: 350px;
-    }
-
     .signup-form h2 {
         font-size: 26px;
         text-align: center;
     }
+
+    .signup-footer {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
 }
 
 @media (max-width: 600px) {
-
-    /* Allow scrolling */
-    body,
-    html {
-        overflow-y: auto;
-    }
-
     .signup-page {
         height: auto;
         min-height: 100vh;
         padding: 20px 0;
-        justify-content: center;
-        /* ✅ Add this */
-        align-items: center;
     }
 
     .signup-container {
         flex-direction: column;
         width: 95%;
-        height: auto;
         box-shadow: none;
         border-radius: 0;
-        overflow: visible;
     }
 
     .signup-illustration {
-        width: 100%;
         padding: 10px;
-        height: auto;
     }
 
     .signup-illustration img {
         width: 100%;
-        height: auto;
         max-height: none;
-        object-fit: contain;
-    }
-
-    .signup-header {
-        padding: 10px 15px;
-        position: relative;
-    }
-
-    .logo-img {
-        width: 70px;
-    }
-
-    .close-btn {
-        font-size: 20px;
-        top: 10px;
-        right: 15px;
     }
 
     .signup-form {
-        width: 100%;
         padding: 30px 20px;
         align-items: center;
     }
 
     .signup-form h2 {
         font-size: 22px;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .name-fields {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .signup-form input {
-        font-size: 14px;
     }
 
     .toggle-password {
@@ -367,16 +285,5 @@ html {
     .join-btn {
         font-size: 16px;
         padding: 12px;
-    }
-
-    .signup-footer {
-        flex-direction: column;
-        gap: 12px;
-        font-size: 13px;
-        text-align: center;
-    }
-
-    .google-signup img {
-        width: 16px;
     }
 }
