@@ -15,6 +15,8 @@
             <li><a href="{{ route('guides') }}">Guides</a></li>
             <li><a href="{{ route('locations') }}">Locations</a></li>
 
+
+
             @auth
                 @if(Auth::user()->role === 'admin')
                     <li><a href="{{ route('admin.dashboard') }}">Admin Dashboard</a></li>
@@ -26,28 +28,24 @@
             @endauth
         </ul>
 
-        <!-- Right: Profile Icon -->
+        <!-- Right: Dashboard & Logout -->
         @auth
-        <div class="user-menu" id="userMenu">
-            <button id="user-btn">
-                <img src="{{ asset('img/profile_icon.png') }}" alt="Profile" class="profile-icon">
-            </button>
-            <div class="dropdown">
-                <a href="{{ route('profile.edit') }}">Profile</a>
-                @if(Auth::user()->role === 'admin')
-                    <a href="{{ route('admin.dashboard') }}">Admin Dashboard</a>
-                @elseif(Auth::user()->role === 'guide')
-                    <a href="{{ route('guide.dashboard') }}">Guide Dashboard</a>
-                @else
-                    <a href="{{ route('home') }}">Dashboard</a>
-                @endif
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit">Log Out</button>
-                </form>
-            </div>
+        <div class="nav-right">
+            @if(Auth::user()->role === 'admin')
+                <a href="{{ route('admin.dashboard') }}" class="dashboard-link">Dashboard</a>
+            @elseif(Auth::user()->role === 'guide')
+                <a href="{{ route('guide.dashboard') }}" class="dashboard-link">Dashboard</a>
+            @else
+                <a href="{{ route('tourist.dashboard') }}" class="dashboard-link">Dashboard</a>
+            @endif
+
+            <form method="POST" action="{{ route('logout') }}" class="logout-form">
+                @csrf
+                <button type="submit" class="logout-button">Logout</button>
+            </form>
         </div>
         @endauth
+
 
         <!-- Hamburger (mobile only) -->
         <div class="hamburger" onclick="toggleMenu()">☰</div>

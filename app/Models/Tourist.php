@@ -23,4 +23,11 @@ class Tourist extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+//bookings
+    public function bookings()
+{
+    return $this->hasMany(Booking::class, 'tourist_id');
+}
+
 }

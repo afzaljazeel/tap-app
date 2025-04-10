@@ -47,4 +47,12 @@ class User extends Authenticatable
 {
     return $this->hasOne(Guide::class);
 }
+
+
+//bookings
+public function bookings()
+{
+    return $this->hasMany(Booking::class, 'tourist_id');
+}
+
 }

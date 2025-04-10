@@ -23,4 +23,16 @@ class Guide extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+
+    //Bookings
+    public function bookings()
+{
+    return $this->hasMany(Booking::class);
+}
+
+public function tours()
+{
+    return $this->hasMany(Tour::class);
+}
 }
