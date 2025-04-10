@@ -8,6 +8,7 @@ use App\Http\Controllers\GuideController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\TouristController;
 
 /*
 |--------------------------------------------------------------------------
@@ -120,7 +121,21 @@ Route::middleware(['auth', 'guide'])->prefix('guide')->group(function () {
 // 🌍 Public Pages
 Route::view('/about', 'pages.about')->name('about');
 Route::view('/guides', 'pages.guides')->name('guides');
-Route::view('/locations', 'pages.locations')->name('locations');
+Route::get('/locations', [TouristController::class, 'locationSelection'])->name('locations');
+
+
+
+// 🧳 Tourist Routes
+Route::middleware(['auth'])->prefix('tourist')->group(function () {
+    Route::get('/dashboard', [TouristController::class, 'dashboard'])->name('tourist.dashboard');
+    Route::get('/location/{location}/guides', [TouristController::class, 'guidesByLocation'])->name('tourist.guides.byLocation');
+    Route::get('/guide/{id}/tours', [TouristController::class, 'viewGuideTours'])->name('tourist.guide.tours');
+    Route::get('/tour/{id}/book', [TouristController::class, 'bookForm'])->name('tourist.tour.bookForm');
+    Route::post('/tour/{id}/book', [TouristController::class, 'submitBooking'])->name('tourist.tour.submitBooking');
+
+    
+    // other tourist booking routes go here soon
+});
 
 // 📌 Auth Routes (Sanctum, Password Confirm, Email Verify, etc.)
 require __DIR__.'/auth.php';

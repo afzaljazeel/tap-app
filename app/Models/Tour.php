@@ -17,4 +17,17 @@ class Tour extends Model
         'amount',
         'picture',
     ];
+
+//Bookings
+
+public function guide()
+{
+    return $this->belongsTo(Guide::class);
+}
+
+public function bookings()
+{
+    return $this->hasMany(Booking::class);
+}
+
 }
