@@ -55,4 +55,9 @@ public function bookings()
     return $this->hasMany(Booking::class, 'tourist_id');
 }
 
+//tourist//
+public function tourist()
+{
+    return $this->hasOne(\App\Models\Tourist::class);
+}
 }

@@ -9,22 +9,24 @@
         </div>
 
         <!-- Center: Nav Links -->
+        @php
+            //Detect if current route is a dashboard page
+            $isDashboard = request()->is('guide/*') || request()->is('admin/*');
+        @endphp
+
         <ul class="nav-links" id="navLinks">
-            <li><a href="{{ route('home') }}">Home</a></li>
-            <li><a href="{{ route('about') }}">About</a></li>
-            <li><a href="{{ route('guides') }}">Guides</a></li>
-            <li><a href="{{ route('locations') }}">Locations</a></li>
-
-
+            @if(!$isDashboard)
+                <li><a href="{{ route('home') }}">Home</a></li>
+                <li><a href="{{ route('about') }}">About</a></li>
+                <li><a href="{{ route('guides') }}">Guides</a></li>
+                <li><a href="{{ route('locations') }}">Locations</a></li>
+            @endif
 
             @auth
-                @if(Auth::user()->role === 'admin')
-                    <li><a href="{{ route('admin.dashboard') }}">Admin Dashboard</a></li>
-                @elseif(Auth::user()->role === 'guide')
-                    <li><a href="{{ route('guide.dashboard') }}">Guide Dashboard</a></li>
-                @else
-                    <li><a href="{{ route('home') }}">Dashboard</a></li>
+                @if ($isDashboard)
+                    <li><a href="{{ route('home') }}">Visit Website</a></li>
                 @endif
+
             @endauth
         </ul>
 

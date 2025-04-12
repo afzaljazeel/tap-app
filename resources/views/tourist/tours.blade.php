@@ -21,7 +21,15 @@
             <p>{{ $tour->details }}</p>
             <p><strong>Duration:</strong> {{ $tour->duration }} hrs</p>
             <p><strong>Price:</strong> ${{ number_format($tour->amount, 2) }}</p>
-            <a href="{{ route('tourist.tour.bookForm', $tour->id) }}" class="btn-primary">Book Now</a>
+            @auth
+    @if(Auth::user()->role === 'tourist')
+        <a href="{{ route('tourist.tour.bookForm', $tour->id) }}" class="btn-primary">Book Now</a>
+            @else
+                <button class="btn-disabled" disabled title="Only tourists can book tours">Book Now</button>
+            @endif
+        @else
+            <a href="{{ route('login') }}" class="btn-primary">Login to Book</a>
+        @endauth
         </div>
     @empty
         <p>No tours found for this guide.</p>

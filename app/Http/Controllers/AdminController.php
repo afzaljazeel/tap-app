@@ -116,5 +116,64 @@ public function profile()
 {
     return view('admin.profile');
 }
+
+//bookings
+public function scheduledTours()
+{
+    $bookings = \App\Models\Booking::with(['tour', 'guide.user', 'tourist'])
+        ->where('status', 'Scheduled')
+        ->orderBy('date')
+        ->get();
+
+    return view('admin.tours.scheduled', compact('bookings'));
+}
+
+public function ongoingTours()
+{
+    $bookings = \App\Models\Booking::with(['tour', 'guide.user', 'tourist'])
+        ->where('status', 'Ongoing')
+        ->orderBy('date')
+        ->get();
+
+    return view('admin.tours.ongoing', compact('bookings'));
+}
+
+
+public function canceledTours()
+{
+    $bookings = \App\Models\Booking::with(['tour', 'guide.user', 'tourist'])
+        ->where('status', 'Cancelled')
+        ->orderBy('date')
+        ->get();
+
+    return view('admin.tours.canceled', compact('bookings'));
+}
+
+public function completedTours()
+{
+    $bookings = \App\Models\Booking::with(['tour', 'guide.user', 'tourist'])
+        ->where('status', 'Completed')
+        ->orderByDesc('date')
+        ->get();
+
+    return view('admin.tours.completed', compact('bookings'));
+}
+
+
+//revenue//
+
+public function revenue()
+{
+    $revenues = \App\Models\Revenue::with(['guide.user', 'tourist', 'tour'])
+        ->latest('date')
+        ->get();
+
+    $totalIncome = $revenues->sum('income');
+    $totalCommission = $revenues->sum('commission');
+    $totalGuidePayout = $revenues->sum('guide_payment');
+
+    return view('admin.revenue', compact('revenues', 'totalIncome', 'totalCommission', 'totalGuidePayout'));
+}
+
 }
 
