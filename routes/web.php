@@ -61,10 +61,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
     // Sections
     Route::get('/profile', [AdminController::class, 'profile'])->name('admin.profile');
-    Route::get('/notifications', [AdminController::class, 'notifications'])->name('admin.notifications');
+    Route::get('/tours/scheduled', [AdminController::class, 'scheduledTours'])->name('admin.scheduledTours');
     Route::get('/tours/ongoing', [AdminController::class, 'ongoingTours'])->name('admin.ongoingTours');
     Route::get('/tours/canceled', [AdminController::class, 'canceledTours'])->name('admin.canceledTours');
-    Route::get('/history', [AdminController::class, 'history'])->name('admin.history');
+    Route::get('/tours/completed', [AdminController::class, 'completedTours'])->name('admin.completedTours');
     Route::get('/revenue', [AdminController::class, 'revenue'])->name('admin.revenue');
     Route::get('/reviews', [AdminController::class, 'reviews'])->name('admin.reviews');
     Route::get('/support', [AdminController::class, 'support'])->name('admin.support');
@@ -112,6 +112,15 @@ Route::middleware(['auth', 'guide'])->prefix('guide')->group(function () {
     Route::get('/tours/ongoing', [GuideController::class, 'ongoingTours'])->name('guide.ongoingTours');
     Route::get('/tours/canceled', [GuideController::class, 'canceledTours'])->name('guide.canceledTours');
 
+    Route::post('/guide/bookings/{id}/approve', [GuideController::class, 'approveBooking'])->name('guide.booking.approve');
+    Route::post('/guide/bookings/{id}/decline', [GuideController::class, 'declineBooking'])->name('guide.booking.decline');
+    Route::get('/calendar', [GuideController::class, 'calendar'])->name('guide.calendar');
+    Route::post('/bookings/{id}/start', [GuideController::class, 'startTour'])->name('guide.booking.start');
+
+    Route::post('/bookings/{id}/complete', [GuideController::class, 'completeTour'])->name('guide.booking.complete');
+
+
+    
     // Other sections
     Route::get('/history', [GuideController::class, 'travelHistory'])->name('guide.travelHistory');
     Route::get('/revenue', [GuideController::class, 'revenue'])->name('guide.revenue');
@@ -132,7 +141,9 @@ Route::middleware(['auth'])->prefix('tourist')->group(function () {
     Route::get('/guide/{id}/tours', [TouristController::class, 'viewGuideTours'])->name('tourist.guide.tours');
     Route::get('/tour/{id}/book', [TouristController::class, 'bookForm'])->name('tourist.tour.bookForm');
     Route::post('/tour/{id}/book', [TouristController::class, 'submitBooking'])->name('tourist.tour.submitBooking');
-
+//profile
+    Route::get('/profile', [TouristController::class, 'editProfile'])->name('profile.edit');
+    Route::patch('/profile', [TouristController::class, 'updateProfile'])->name('profile.update');
     
     // other tourist booking routes go here soon
 });

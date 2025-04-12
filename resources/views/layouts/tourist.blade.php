@@ -20,7 +20,7 @@
 
             <nav class="nav-links">
                 <ul>
-                    <li><a href="{{ route('profile.edit') }}">Profile</a></li>
+                <li><a href="{{ route('profile.edit') }}">Profile</a></li>
                     <li><a href="{{ route('tourist.dashboard') }}">My Bookings</a></li>
                     {{-- Add more links later like notifications, reviews, etc --}}
                 </ul>

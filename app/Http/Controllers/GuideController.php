@@ -8,6 +8,11 @@ use App\Models\Guide;
 use App\Models\Tour;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Booking;
+use Carbon\Carbon;
+use App\Models\Revenue;
+
+
 
 
 class GuideController extends Controller
@@ -62,7 +67,11 @@ class GuideController extends Controller
 }
 
     public function notifications() {
-        return view('guide.notifications');
+        $guide = auth()->user()->guide;
+        $bookings = $guide->bookings()->with(['tour', 'tourist'])->where('status', 'Pending')->orderBy('created_at', 'desc')->get();
+    
+        return view('guide.notifications', compact('bookings'));
+    
     }
 
     public function ongoingTours() {
@@ -75,10 +84,6 @@ class GuideController extends Controller
 
     public function travelHistory() {
         return view('guide.travel-history');
-    }
-
-    public function revenue() {
-        return view('guide.revenue');
     }
 
     public function support() {
@@ -170,4 +175,149 @@ public function storeTour(Request $request)
   }
 
 
+
+  // Bookings
+
+    public function approveBooking($id)
+    {
+        $booking = Booking::findOrFail($id);
+
+        if ($booking->guide_id !== Auth::user()->guide->id) {
+            abort(403); // Unauthorized
+        }
+
+        $booking->status = 'Scheduled';
+        $booking->save();
+
+        return back()->with('success', 'Booking approved successfully.');
+    }
+
+    public function declineBooking(Request $request, $id)
+    {
+        $request->validate([
+            'reason' => 'required|string|max:255',
+        ]);
+
+        $booking = Booking::findOrFail($id);
+
+        if ($booking->guide_id !== Auth::user()->guide->id) {
+            abort(403); // Unauthorized
+        }
+
+        $booking->status = 'Cancelled';
+        $booking->notes = 'Declined: ' . $request->reason;
+        $booking->save();
+
+        return back()->with('error', 'Booking declined.');
+    }
+
+    
+    public function calendar()
+    {
+        $guideId = Auth::user()->guide->id;
+    
+        $scheduled = Booking::with('tour', 'tourist')
+            ->where('guide_id', $guideId)
+            ->where('status', 'Scheduled')
+            ->orderBy('date')
+            ->get();
+    
+        $ongoing = Booking::with('tour', 'tourist')
+            ->where('guide_id', $guideId)
+            ->where('status', 'Ongoing')
+            ->orderBy('date')
+            ->get();
+    
+        $completed = Booking::with('tour', 'tourist')
+            ->where('guide_id', $guideId)
+            ->where('status', 'Completed')
+            ->orderBy('date')
+            ->get();
+    
+        $cancelled = Booking::with('tour', 'tourist')
+            ->where('guide_id', $guideId)
+            ->where('status', 'Cancelled')
+            ->orderBy('date')
+            ->get();
+    
+        return view('guide.calendar', compact('scheduled', 'ongoing', 'completed', 'cancelled'));
+    }
+
+    
+        public function startTour($id)
+        {
+            $booking = Booking::findOrFail($id);
+
+            // Ensure the guide owns the booking
+            if ($booking->guide_id !== Auth::user()->guide->id) {
+                abort(403);
+            }
+
+            // Ensure the booking is scheduled and for today or earlier
+            if ($booking->status !== 'Scheduled') {
+                return back()->with('error', 'Only scheduled bookings can be started.');
+            }
+
+            if (\Carbon\Carbon::parse($booking->date)->isFuture()) {
+                return back()->with('error', 'You can only start tours on the booking day.');
+            }
+
+            // Update status
+            $booking->status = 'Ongoing';
+            $booking->save();
+
+            return back()->with('success', 'Tour marked as ongoing.');
+        }
+
+        public function completeTour($id)
+        {
+            $booking = Booking::with(['tour', 'guide', 'tourist'])->findOrFail($id);
+
+            if ($booking->guide_id !== Auth::user()->guide->id) {
+                abort(403);
+            }
+
+            if ($booking->status !== 'Ongoing') {
+                return back()->with('error', 'Only ongoing bookings can be marked as completed.');
+            }
+
+            // Update booking status
+            $booking->status = 'Completed';
+            $booking->save();
+
+            // Calculate revenue details
+            $income = $booking->tour->amount;
+            $commissionRate = 0.12; // 10% platform fee — change if needed
+            $commission = round($income * $commissionRate, 2);
+            $guidePayment = $income - $commission;
+
+            // Save revenue record
+            Revenue::create([
+                'booking_id'    => $booking->id,
+                'tour_id'       => $booking->tour_id,
+                'guide_id'      => $booking->guide_id,
+                'tourist_id'    => $booking->tourist_id,
+                'date'          => Carbon::now()->toDateString(),
+                'income'        => $income,
+                'commission'    => $commission,
+                'guide_payment' => $guidePayment,
+            ]);
+
+            return back()->with('success', 'Tour marked as completed and revenue recorded.');
+        }
+        // Show revenue details
+        public function revenue()
+        {
+            $guideId = Auth::user()->guide->id;
+
+            $revenues = Revenue::where('guide_id', $guideId)
+                ->orderBy('date', 'desc')
+                ->get();
+
+            $totalIncome = $revenues->sum('income');
+            $totalCommission = $revenues->sum('commission');
+            $totalGuidePayment = $revenues->sum('guide_payment');
+
+            return view('guide.revenue', compact('revenues', 'totalIncome', 'totalCommission', 'totalGuidePayment'));
+        }
 }

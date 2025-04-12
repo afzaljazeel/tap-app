@@ -2,14 +2,14 @@
 
 @extends('layouts.app')
 
-@section('title', 'Canceled Tours')
+@section('title', 'Scheduled Tours')
 
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/guide-dashboard.css') }}">
 
 <div class="dashboard-header">
-    <h2>Canceled Tours</h2>
-    <p>All tours declined or canceled by guides or tourists.</p>
+    <h2>Scheduled Tours</h2>
+    <p>All upcoming tours approved by guides.</p>
 </div>
 
 @if($bookings->count())
@@ -22,7 +22,7 @@
                     <th>Tour</th>
                     <th>Guide</th>
                     <th>Tourist</th>
-                    <th>Notes</th>
+                    <th>Price</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,13 +33,13 @@
                         <td>{{ $booking->tour->name }}</td>
                         <td>{{ $booking->guide->user->name }}</td>
                         <td>{{ $booking->tourist->name }}</td>
-                        <td>{{ $booking->notes ?? 'N/A' }}</td>
+                        <td>${{ number_format($booking->tour->amount, 2) }}</td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
 @else
-    <p>No canceled tours.</p>
+    <p>No scheduled tours at the moment.</p>
 @endif
 @endsection

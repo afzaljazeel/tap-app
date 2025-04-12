@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Guide;
 use App\Models\Tour;
+use Illuminate\Support\Facades\Hash;
 
 class TouristController extends Controller
 {
@@ -79,5 +80,56 @@ class TouristController extends Controller
         return view('pages.locations', compact('locations'));
     }
     
+    //profile//
+
+    public function editProfile()
+    {
+        $user = Auth::user();
+        $tourist = $user->tourist;
+    
+        if (!$tourist) {
+            $tourist = \App\Models\Tourist::create([
+                'user_id' => $user->id,
+                'nationality' => '',
+                'phone' => '',
+                'extra_notes' => '',
+            ]);
+        }
+    
+        return view('tourist.profile', compact('user', 'tourist'));
+    }
+
+public function updateProfile(Request $request)
+{
+    $user = Auth::user();
+    $tourist = $user->tourist;
+
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email',
+        'password' => 'nullable|string|min:8|confirmed',
+        'nationality' => 'nullable|string|max:255',
+        'phone' => 'nullable|string|max:20',
+        'extra_notes' => 'nullable|string|max:500',
+    ]);
+
+    // Update user
+    $user->name = $request->name;
+    $user->email = $request->email;
+    if ($request->filled('password')) {
+        $user->password = Hash::make($request->password);
+    }
+    $user->save();
+
+    // Update tourist info
+    $tourist->nationality = $request->nationality;
+    $tourist->phone = $request->phone;
+    $tourist->extra_notes = $request->extra_notes;
+    $tourist->save();
+
+    return redirect()->route('profile.edit')->with('status', 'Profile updated successfully.');
+}
+
+
 
 }
