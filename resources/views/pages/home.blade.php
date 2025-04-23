@@ -20,12 +20,16 @@
     <section class="locations">
     <h2>Popular Locations</h2>
     <div class="location-container">
+    @if (!empty($locations) && is_iterable($locations))
         @foreach ($locations as $location)
             <div class="location-card">
             <img src="{{ asset($location['image']) }}" alt="{{ $location['name'] }}">
             <h3>{{ $location['name'] }}</h3>
             </div>
         @endforeach
+        @else
+            <p>No locations available at the moment.</p>
+        @endif
     </div>
 </section>
 
@@ -33,6 +37,7 @@
     <section class="reviews">
         <h2>Our Reviews</h2>
         <div class="review-container">
+        @if (!empty($reviews) && is_iterable($reviews))
             @foreach ($reviews as $review)
                 <div class="review-card">
                     <div class="review-header">
@@ -43,6 +48,9 @@
                     <h4 class="review-author">{{ $review['author'] }}</h4>
                 </div>
             @endforeach
+            @else
+                <p>No reviews to show right now.</p>
+            @endif
         </div>
     </section>
 
@@ -50,6 +58,7 @@
     <section class="faq-section">
         <h2>Frequently Asked Questions</h2>
         <div class="faq-container">
+        @if (!empty($faqs) && is_iterable($faqs))
             @foreach ($faqs as $faq)
                 <div class="faq-item">
                     <button class="faq-question" onclick="toggleFAQ(this)">
@@ -59,6 +68,9 @@
                     <p class="faq-answer">{{ $faq['answer'] }}</p>
                 </div>
             @endforeach
+            @else
+                <p>No FAQs found.</p>
+            @endif
         </div>
     </section>
 @endsection
