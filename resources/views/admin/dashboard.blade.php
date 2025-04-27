@@ -47,7 +47,7 @@
                 <a href="{{ route('admin.profile') }}">User Profile</a>
                 <a href="{{ route('admin.users') }}">Manage Users</a>
                 <a href="{{ route('admin.scheduledTours') }}">Scheduled Tours</a>
-                <a class="active" href="{{ route('admin.ongoingTours') }}">On going Tours</a>
+                <a href="{{ route('admin.ongoingTours') }}">On going Tours</a>
                 <a href="{{ route('admin.canceledTours') }}">Canceled Tours</a>
                 <a href="{{ route('admin.completedTours') }}">Completed Tours</a>
                 <a href="{{ route('admin.revenue') }}"> Revenue</a>

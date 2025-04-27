@@ -150,18 +150,19 @@ body {
 .nav-links a {
     display: block;
     padding: 10px 16px;
-    background: linear-gradient(150deg, #68d5dd, #f0f8ff);
-    color: #333;
+    background: linear-gradient(150deg, #5e3dbb, #4a90e2);
+    color: #fff;
     border-radius: 6px;
     text-align: center;
     font-weight: 500;
     text-decoration: none;
     transition: background 0.3s ease, color 0.3s ease;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .nav-links a:hover {
-    background: linear-gradient(150deg, #41a5ac, #e0f2ff);
+    background: linear-gradient(150deg, #3d6bb0, #2ecc71);
     color: #004d66;
     text-decoration: none;
 }

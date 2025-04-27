@@ -118,17 +118,43 @@ html {
     gap: 12px;
 }
 
+/* ==================== */
+/* SIDEBAR NAV BUTTONS  */
+/* ==================== */
+
+/* ==================== */
+/* SOFTER SIDEBAR BUTTONS */
+/* ==================== */
 .sidebar-nav a {
     text-decoration: none;
-    color: #333;
+    color: #2d3748;
+    /* Dark gray text (better contrast than pure white) */
     font-size: 15px;
     padding: 10px 15px;
     border-radius: 6px;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
+    background: #ebf2ff;
+    /* Very light blue */
+    border: 1px solid #d6e4ff;
+    /* Subtle border */
+    margin-bottom: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .sidebar-nav a:hover {
-    background-color: #f0f0f0;
+    background: #d6e4ff;
+    /* Slightly darker on hover */
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    color: #1e3e95;
+    /* Darker text on hover */
+}
+
+/* Active state */
+.sidebar-nav a.active {
+    background: #bfd4ff;
+    border-color: #93b5ff;
+    font-weight: 500;
 }
 
 /* Dashboard */
