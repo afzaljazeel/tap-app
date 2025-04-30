@@ -1,0 +1,193 @@
+
+
+/* Base Styles */
+:root {
+    --primary: #4f46e5;
+    --primary-hover: #4338ca;
+    --success: #10b981;
+    --success-hover: #0d9f6e;
+    --warning: #d97706;
+    /* Darker yellow for better contrast */
+    --danger: #dc2626;
+    /* Darker red for better contrast */
+    --text-dark: #111827;
+    /* Darker for better contrast */
+    --text-medium: #374151;
+    /* Darker gray */
+    --text-light: #6b7280;
+    --bg-light: #f9fafb;
+    --border-light: #e5e7eb;
+    --table-header-bg: #f3f4f6;
+    /* Slightly darker for better contrast */
+    --table-row-hover: #f4f5f7;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --transition: all 0.2s ease-in-out;
+}
+
+/* Table Contrast Improvements */
+.calendar-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: white;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.calendar-table thead {
+    background-color: var(--table-header-bg);
+    position: sticky;
+    top: 0;
+}
+
+.calendar-table th {
+    padding: 1rem 1.25rem;
+    text-align: left;
+    color: var(--text-dark);
+    /* Darker for better contrast */
+    font-weight: 700;
+    /* Bolder for better readability */
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid var(--border-light);
+}
+
+.calendar-table td {
+    padding: 1.25rem;
+    border-bottom: 1px solid var(--border-light);
+    vertical-align: middle;
+    color: var(--text-dark);
+    /* Darker text for better contrast */
+    font-size: 0.95rem;
+    background: white;
+}
+
+.calendar-table tr:hover td {
+    background-color: var(--table-row-hover);
+}
+
+/* Header Contrast Improvements */
+.dashboard-header {
+    margin-bottom: 2.5rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid var(--primary);
+}
+
+.dashboard-header h2 {
+    color: var(--text-dark);
+    font-size: 1.8rem;
+    margin-bottom: 0.75rem;
+    /* Increased spacing */
+    font-weight: 800;
+    /* Bolder for better contrast */
+}
+
+.dashboard-header p {
+    color: var(--text-medium);
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Card Header Contrast */
+.card h3 {
+    padding: 1.25rem 1.5rem;
+    margin: 0;
+    background: linear-gradient(to right, #f9fafb, #f3f4f6);
+    color: var(--text-dark);
+    font-size: 1.25rem;
+    font-weight: 700;
+    /* Bolder for better contrast */
+    border-bottom: 1px solid var(--border-light);
+}
+
+/* Status Colors with Better Contrast */
+.calendar-table td:nth-child(5) {
+    font-weight: 600;
+    /* Bolder for better readability */
+}
+
+.calendar-table td:nth-child(5)[data-status*="Scheduled"] {
+    color: #2563eb;
+    /* Darker blue */
+}
+
+.calendar-table td:nth-child(5)[data-status*="Scheduled"]::before {
+    background-color: #2563eb;
+}
+
+.calendar-table td:nth-child(5)[data-status*="Ongoing"] {
+    color: #d97706;
+    /* Darker amber */
+}
+
+.calendar-table td:nth-child(5)[data-status*="Ongoing"]::before {
+    background-color: #d97706;
+}
+
+.calendar-table td:nth-child(5)[data-status*="Completed"] {
+    color: #059669;
+    /* Darker green */
+}
+
+.calendar-table td:nth-child(5)[data-status*="Completed"]::before {
+    background-color: #059669;
+}
+
+.calendar-table td:nth-child(5)[data-status*="Cancelled"] {
+    color: #dc2626;
+    /* Darker red */
+}
+
+.calendar-table td:nth-child(5)[data-status*="Cancelled"]::before {
+    background-color: #dc2626;
+}
+
+/* Empty State Contrast */
+.card>p {
+    padding: 2rem;
+    color: var(--text-medium);
+    /* Darker for better contrast */
+    margin: 0;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+
+    .calendar-table th,
+    .calendar-table td {
+        padding: 0.875rem 1rem;
+        /* Slightly larger for mobile */
+    }
+
+    .calendar-table th {
+        font-size: 0.7rem;
+        /* Slightly larger for mobile */
+    }
+
+    .dashboard-header h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Accessibility Focus States */
+.btn-primary:focus,
+.btn-success:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.calendar-table td:focus-within {
+    background-color: var(--table-row-hover);
+    outline: 2px dashed var(--primary);
+    outline-offset: -2px;
+}
