@@ -7,6 +7,7 @@
 @section('title', 'Booking Notifications')
 
 @section('content')
+<link href="{{ asset('css/guide-notification.css') }}" rel="stylesheet">
 
 <div class="dashboard-section">
     <h2>Booking Requests</h2>
