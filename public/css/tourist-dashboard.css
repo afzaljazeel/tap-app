@@ -4,6 +4,106 @@ body {
     margin: 0;
 }
 
+/* Hero Section */
+.admin-hero {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    overflow: hidden;
+}
+
+.hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+.hero-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 28px;
+    font-weight: 600;
+    color: #333333;
+    flex-wrap: wrap;
+}
+
+.hero-logo-img {
+    width: 80px;
+    height: auto;
+}
+
+@media (max-width: 600px) {
+    .hero-title {
+        font-size: 22px;
+    }
+
+    .hero-logo-img {
+        width: 26px;
+    }
+}
+
+/* Wrapper Layout */
+.admin-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 240px;
+    background: #fff;
+    padding: 30px 20px;
+    box-shadow: 2px 0 6px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+.admin-avatar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    gap: 10px;
+}
+
+.admin-avatar img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.admin-avatar .badge {
+    font-size: 14px;
+    font-weight: 500;
+    color: #777;
+}
+
+.sidebar-nav {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+
 .dashboard-container {
     display: flex;
     min-height: 100vh;
@@ -48,10 +148,25 @@ body {
 }
 
 .nav-links a {
-    text-decoration: none;
-    color: #333;
+    display: block;
+    padding: 10px 16px;
+    background: linear-gradient(150deg, #5e3dbb, #4a90e2);
+    color: #fff;
+    border-radius: 6px;
+    text-align: center;
     font-weight: 500;
+    text-decoration: none;
+    transition: background 0.3s ease, color 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
+
+.nav-links a:hover {
+    background: linear-gradient(150deg, #3d6bb0, #2ecc71);
+    color: #004d66;
+    text-decoration: none;
+}
+
 
 .logout-btn {
     margin-top: 16px;
@@ -85,13 +200,75 @@ body {
     margin-top: 30px;
 }
 
-.booking-card {
-    background: white;
-    border-radius: 6px;
-    padding: 16px;
-    margin-bottom: 16px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+.booking-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
 }
+
+.booking-card {
+    display: grid;
+    grid-template-columns: auto auto;
+    /* Create two columns */
+    grid-gap: 10px;
+    max-width: 500px;
+    /* Adjust based on the content */
+    background: linear-gradient(145deg, #f0faff, #ffffff);
+    border-left: 6px solid #68d5dd;
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    font-size: 15px;
+    color: #333;
+    position: relative;
+    align-items: center;
+    width: 100%;
+}
+
+.booking-card strong::before {
+    content: "📌";
+    margin-right: 6px;
+    font-size: 14px;
+    color: #68d5dd;
+}
+
+.booking-card strong:nth-of-type(2)::before {
+    content: "📅";
+}
+
+.booking-card strong:nth-of-type(3)::before {
+    content: "⏰";
+}
+
+.booking-card strong:nth-of-type(4)::before {
+    content: "📍";
+}
+
+.booking-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+
+.booking-card .status {
+    margin-top: 8px;
+    display: inline-block;
+    padding: 4px 10px;
+    font-size: 13px;
+    background-color: #e1f5fe;
+    color: #0277bd;
+    border-radius: 12px;
+    font-weight: 500;
+    width: fit-content;
+    grid-column: span 2;
+    /* Make the status span across both columns */
+}
+
+
 
 
 .back-btn {

@@ -6,6 +6,7 @@
     <title>Tourist Dashboard</title>
     <link rel="stylesheet" href="{{ asset('css/tourist-dashboard.css') }}">
     <link rel="stylesheet" href="{{ asset('css/tourist-book.css') }}">
+    
 
 </head>
 <body>
@@ -13,7 +14,7 @@
     <div class="dashboard-container">
         <aside class="sidebar">
             <div class="profile-section">
-                <img src="{{ asset('img/profile-placeholder.png') }}" alt="Tourist Avatar">
+                <img src="{{ asset('img/tourist.png') }}" alt="Tourist Avatar">
                 <h3>{{ Auth::user()->name }}</h3>
                 <p>Tourist Dashboard</p>
             </div>
