@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -43,21 +42,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // Only one definition of guide() method should exist
     public function guide()
-{
-    return $this->hasOne(Guide::class);
-}
+    {
+        return $this->hasOne(Guide::class);
+    }
 
+    // bookings
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class, 'tourist_id');
+    }
 
-//bookings
-public function bookings()
-{
-    return $this->hasMany(Booking::class, 'tourist_id');
-}
-
-//tourist//
-public function tourist()
-{
-    return $this->hasOne(\App\Models\Tourist::class);
-}
+    // tourist
+    public function tourist()
+    {
+        return $this->hasOne(\App\Models\Tourist::class);
+    }
 }

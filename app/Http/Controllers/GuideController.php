@@ -102,6 +102,27 @@ public function createTour()
     return view('guide.tours.create');
 }
 
+public function showAllGuides()
+{
+    // Fetch all guides from the database
+    $guides = Guide::all();
+    
+    // Return the view with the guides data
+    return view('pages.guides', compact('guides'));
+
+}
+
+// app/Http/Controllers/GuideController.php
+public function show($id) {
+    // Retrieve the guide by ID along with the associated user
+    $guide = Guide::with('user')->findOrFail($id);
+
+    // Pass the guide to the profile view
+    return view('pages.profile', compact('guide'));
+}
+
+
+
 
 /*=======================================*/ 
 

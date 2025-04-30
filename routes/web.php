@@ -9,12 +9,19 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\TouristController;
+use App\Http\Controllers\SearchController;
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 */
+
+
+
+
+Route::get('/search', [SearchController::class, 'index'])->name('search');
+
 
 // 🔁 Redirect root to login
 Route::get('/', fn () => redirect()->route('login'));
@@ -130,8 +137,18 @@ Route::middleware(['auth', 'guide'])->prefix('guide')->group(function () {
 // 🌍 Public Pages
 Route::view('/about', 'pages.about')->name('about');
 Route::view('/guides', 'pages.guides')->name('guides');
+// routes/web.php
+Route::get('/guide/{id}', [GuideController::class, 'show'])->name('guide.show');
+
+// 🔎 Search Page
+// Route::get('/search', function () {
+//     return view('pages.search');
+// })->name('search');
+
 Route::get('/locations', [TouristController::class, 'locationSelection'])->name('locations');
 
+Route::get('/guides', [GuideController::class, 'showAllGuides'])->name('guides');
+Route::get('/guide/{id}', [GuideController::class, 'show'])->name('guide.show');
 
 
 // 🧳 Tourist Routes
