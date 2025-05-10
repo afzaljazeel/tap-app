@@ -429,4 +429,5 @@ public function storeTour(Request $request)
     return view('guide.public-profile', compact('guide'));
 }
 
+
 }

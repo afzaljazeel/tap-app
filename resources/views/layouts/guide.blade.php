@@ -33,7 +33,7 @@
                     <li><a href="{{ route('guide.canceledTours') }}" class="{{ $route === 'guide.canceledTours' ? 'active' : '' }}">Canceled Tours</a></li>
                     <li><a href="{{ route('guide.travelHistory') }}" class="{{ $route === 'guide.travelHistory' ? 'active' : '' }}">Travel History</a></li>
                     <li><a href="{{ route('guide.revenue') }}" class="{{ $route === 'guide.revenue' ? 'active' : '' }}">Monthly Revenue</a></li>
-                    <li><a href="{{ route('guide.activity') }}" class="{{ $route === 'guide.activity' ? 'active' : '' }}">Activity</a></li>
+                   
 
                     <li>
                         <a href="{{ route('home') }}" target="_blank" style="background-color: #e0f2fe; color: #0369a1; font-weight: 500;">

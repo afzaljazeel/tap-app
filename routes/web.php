@@ -100,6 +100,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 // 🧭 Guide Dashboard
 Route::middleware(['auth', 'guide'])->prefix('guide')->group(function () {
 
+
+
     // Dashboard
     Route::get('/dashboard', function () {
         return view('guide.dashboard');
