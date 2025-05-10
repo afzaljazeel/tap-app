@@ -7,6 +7,7 @@
     <title>Guides - Tap a Guide</title>
     <!-- Include Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ asset('css/homepage.css') }}">
 </head>
 
 <body class="font-sans bg-gray-50">
@@ -30,15 +31,16 @@
                 @else
                     @foreach ($guides as $guide)
                     <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300">
-                        <img src="{{ asset($guide->profile_image) }}" alt="{{ $guide->user->name }}" class="w-full h-64 object-cover rounded-lg mb-4">
-                        
+                    <img src="{{ asset('storage/' . $guide->profile_picture) }}" alt="{{ $guide->user->name }}" class="w-full h-64 object-cover object-center rounded-lg mb-4">
+   
                         <!-- Accessing the name from the associated user -->
                         <h3 class="text-xl font-semibold text-gray-800">{{ $guide->user->name }}</h3>
                     
                         <p class="mt-2 text-gray-600">{{ $guide->specialization }}</p>
                         <p class="mt-2 text-gray-500">{{ $guide->bio }}</p>
                         <p class="mt-2 text-gray-500">Location: {{ $guide->location }}</p>
-                        <a href="{{ route('guide.show', $guide->id) }}" class="mt-4 inline-block bg-green-500 text-white py-2 px-6 rounded-full font-semibold hover:bg-green-600">View Profile</a>
+                        <a href="{{ route('tourist.guide.tours', $guide->id) }}" class="mt-4 inline-block bg-green-500 text-white py-2 px-6 rounded-full font-semibold hover:bg-green-600">View Profile</a>
+
                     </div>
                     
                     @endforeach
@@ -47,12 +49,15 @@
         </div>
     </section>
 
-    <!-- Contact Us Section -->
-    <section class="bg-green-500 text-white py-16 text-center">
-        <h2 class="text-3xl font-semibold mb-4">Get in Touch</h2>
-        <p class="text-lg">Have any questions or need assistance? Reach out to us!</p>
-        <a href="mailto:info@tapaguide.com" class="mt-4 inline-block bg-white text-green-500 py-2 px-6 rounded-full font-semibold hover:bg-green-100">Contact Us</a>
-    </section>
+<!-- Footer Section -->
+<footer class="footer">
+    <div class="footer-content">
+        <img src="{{ asset('img/logo_high_res.png') }}" alt="Tap Logo" class="footer-logo">
+        <p class="footer-slogan">Your Dream Tour, One Tap Away.</p>
+        <p class="footer-contact">Contact: info@tapaguide.com</p>
+        <p class="footer-rights">© 2025 Tap A Guide | All Rights Reserved</p>
+    </div>
+</footer>
 
 </body>
 

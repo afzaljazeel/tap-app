@@ -13,17 +13,21 @@ class TouristController extends Controller
 {
     public function dashboard()
     {
-        $user = Auth::user();
+        $userId = auth()->id();
+    
+        $pending = Booking::where('tourist_id', $userId)->where('status', 'Pending')->get();
+        $scheduled = Booking::where('tourist_id', $userId)->where('status', 'Scheduled')->get();
+        $ongoing = Booking::where('tourist_id', $userId)->where('status', 'Ongoing')->get();
+        $completed = Booking::where('tourist_id', $userId)->where('status', 'Completed')->get();
+        $cancelled = Booking::where('tourist_id', $userId)->where('status', 'Cancelled')->get();
+        $recentBookings = Booking::where('tourist_id', $userId)
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
+    
+            return view('tourist.dashboard', compact('pending', 'scheduled', 'ongoing', 'completed', 'cancelled', 'recentBookings'));
 
-        // Load bookings by status (for dashboard display)
-        $pending = $user->bookings()->where('status', 'Pending')->get();
-        $scheduled = $user->bookings()->where('status', 'Scheduled')->get();
-        $ongoing = $user->bookings()->where('status', 'Ongoing')->get();
-        $completed = $user->bookings()->where('status', 'Completed')->get();
-
-        return view('tourist.dashboard', compact('pending', 'scheduled', 'ongoing', 'completed'));
     }
-
 
     //booking
         
@@ -46,10 +50,24 @@ class TouristController extends Controller
         return view('tourist.tours', compact('guide', 'tours'));
     }
 
+    
     public function bookForm($id)
     {
         $tour = Tour::with('guide.user')->findOrFail($id);
-        return view('tourist.book', compact('tour'));
+
+        // Get all bookings for this guide with future or today dates (not cancelled)
+        $bookings = \App\Models\Booking::where('guide_id', $tour->guide_id)
+            ->whereIn('status', ['Pending', 'Scheduled', 'Ongoing'])
+            ->where('date', '>=', now()->toDateString())
+            ->get(['date', 'preferred_time']);
+
+        // Group like ['2025-05-10' => ['Morning', 'Evening']]
+        $bookedSlots = [];
+        foreach ($bookings as $b) {
+            $bookedSlots[$b->date][] = $b->preferred_time;
+        }
+
+        return view('tourist.book', compact('tour', 'bookedSlots'));
     }
 
     public function submitBooking(Request $request, $id)
@@ -71,7 +89,7 @@ class TouristController extends Controller
             'notes' => $request->notes,
         ]);
 
-        return redirect()->route('tourist.dashboard')->with('success', 'Booking request sent!');
+        return redirect()->route('tourist.mybookings')->with('success', 'Your booking request has been sent!');
     }
 
     public function locationSelection()
@@ -130,6 +148,30 @@ public function updateProfile(Request $request)
     return redirect()->route('profile.edit')->with('status', 'Profile updated successfully.');
 }
 
+public function myBookings()
+{
+    $bookings = Booking::where('tourist_id', auth()->user()->id)->latest()->get();
+
+    return view('tourist.mybookings', compact('bookings'));
+}
+
+
+public function tourHistory()
+{
+    $userId = auth()->id();
+
+    $completed = Booking::where('tourist_id', $userId)
+        ->where('status', 'Completed')
+        ->orderBy('date', 'desc')
+        ->get();
+
+    $cancelled = Booking::where('tourist_id', $userId)
+        ->where('status', 'Cancelled')
+        ->orderBy('date', 'desc')
+        ->get();
+
+    return view('tourist.tour-history', compact('completed', 'cancelled'));
+}
 
 
 }

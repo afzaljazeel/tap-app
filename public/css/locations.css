@@ -1,3 +1,4 @@
+
 /* Location Hero */
 .location-hero {
     text-align: center;
@@ -13,16 +14,17 @@
 .location-hero p {
     font-size: 16px;
     color: #555;
+    margin-bottom: 50px;
 }
 
 /* Grid of locations */
 .location-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
     max-width: 1000px;
-    margin: 0 auto 60px;
-    padding: 0 20px;
+    margin: 0 auto 20px;
+    padding: 0 10px 20px 10px;
 }
 
 .location-tile {
@@ -53,28 +55,100 @@
 }
 
 
+
+
+/* =======================
+   Hero Section Heading
+======================= */
 .section-heading {
     text-align: center;
     margin: 40px 0 20px;
 }
 
-.card-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-    justify-content: center;
-    padding: 0 20px 60px;
+.section-heading h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+    color: #222;
 }
 
+.section-heading p {
+    font-size: 16px;
+    color: #555;
+}
+
+/* =======================
+   Grid of Guide Cards
+======================= */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+}
+
+@media (max-width: 1200px) {
+    .card-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =======================
+   Guide Cards
+======================= */
 .card {
     background: #fff;
     border-radius: 10px;
-    padding: 24px;
-    width: 300px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    text-align: center;
+    padding: 24px 24px 32px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    text-align: left;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 8px;
+}
+
+.card p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 6px;
+}
+
+/* Guide Images */
+.tour-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+
+/* Specialty Tags */
 .specialty-bubble {
     display: inline-block;
     background: #f0f0f0;
@@ -84,72 +158,24 @@
     border-radius: 20px;
 }
 
+/* View Button */
 .btn-primary {
     display: inline-block;
     margin-top: 12px;
-    background: #007bff;
+    background: #10b981;
     color: white;
     padding: 8px 16px;
     border-radius: 6px;
     text-decoration: none;
     font-weight: 500;
+    transition: background 0.2s ease;
 }
 
-.card-img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 12px;
+.btn-primary:hover {
+    background: #0e9e6e;
 }
 
-.tour-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 12px;
-    margin-bottom: 12px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-
-
-/* booking form Styles */
-
-.booking-container {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-.booking-summary img.tour-image {
-    width: 100%;
-    max-height: 300px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-.booking-form input,
-.booking-form select,
-.booking-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin-top: 6px;
-    margin-bottom: 16px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-}
-
-.booking-form .btn-primary {
-    width: 100%;
-    padding: 10px;
-}
-
-
-/* Booking btn diable for non other than tourists */
-
+/* Disabled Button (if needed) */
 .btn-disabled {
     background-color: #ccc;
     color: #666;
@@ -158,4 +184,81 @@
     border-radius: 5px;
     cursor: not-allowed;
     font-weight: bold;
+}
+
+/* =======================
+   Footer
+======================= */
+.footer {
+    background-color: #10b981;
+    color: #fff;
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-logo {
+    width: 60px;
+    height: auto;
+    margin: 0 auto 12px;
+}
+
+.footer-slogan {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 12px;
+}
+
+.footer-contact,
+.footer-rights {
+    color: #000000;
+    font-size: 14px;
+}
+
+.footer-rights {
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+/* =======================
+   Mobile Optimizations
+======================= */
+@media (max-width: 600px) {
+    .section-heading h1 {
+        font-size: 28px;
+    }
+
+    .section-heading p {
+        font-size: 14px;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 360px;
+        margin: 0 auto;
+        padding: 16px;
+    }
+
+    .card h3 {
+        font-size: 18px;
+    }
+
+    .card p {
+        font-size: 13px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        text-align: center;
+    }
+
+    .footer-slogan {
+        font-size: 16px;
+    }
+
+    .footer-contact,
+    .footer-rights {
+        font-size: 12px;
+    }
 }

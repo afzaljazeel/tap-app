@@ -65,6 +65,8 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
 
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    // Admin AJAX route to get guide count
+    Route::get('/admin/count/guides', [AdminController::class, 'getGuideCount'])->name('admin.getGuideCount');
 
     // Sections
     Route::get('/profile', [AdminController::class, 'profile'])->name('admin.profile');
@@ -161,7 +163,12 @@ Route::middleware(['auth'])->prefix('tourist')->group(function () {
 //profile
     Route::get('/profile', [TouristController::class, 'editProfile'])->name('profile.edit');
     Route::patch('/profile', [TouristController::class, 'updateProfile'])->name('profile.update');
-    
+    Route::get('/tourist/mybookings', [TouristController::class, 'myBookings'])->name('tourist.mybookings');
+    Route::get('/tourist/tour-history', [TouristController::class, 'tourHistory'])->name('tourist.completed');
+    Route::get('/guides/{id}/profile', [GuideController::class, 'publicProfile'])->name('public.guideProfile');
+    Route::get('/guide/dashboard', [GuideController::class, 'dashboard'])->name('guide.dashboard');
+    Route::get('/guide/profile/{id}', [GuideController::class, 'viewPublicProfile'])->name('guide.profile.view');
+
     // other tourist booking routes go here soon
 });
 

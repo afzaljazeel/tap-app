@@ -1,107 +1,122 @@
-.profile-container {
-    max-width: 700px;
-    margin: 40px auto;
-    padding: 30px;
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+body {
+    background-color: #f8f9fa;
     font-family: 'Segoe UI', sans-serif;
 }
 
-.profile-container h2 {
-    font-size: 26px;
-    margin-bottom: 25px;
-    color: #2c3e50;
-    text-align: center;
-}
-
-.profile-container label {
-    font-weight: 600;
-    display: block;
-    margin-bottom: 5px;
-    color: #34495e;
-}
-
-.profile-container input {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #ccc;
+/* Header */
+.dashboard-header {
+    padding-bottom: 20px;
+    border-left: 4px solid #3b82f6;
+    background-color: #f1f5f9;
+    padding: 16px 24px;
     border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.dashboard-header h2 {
+    font-size: 24px;
+    color: #1e293b;
+    margin: 0;
+}
+
+/* Profile Form Container */
+.profile-form-card {
+    background-color: #fff;
+    padding: 30px 36px;
+    border-radius: 10px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    max-width: 600px;
+    margin: 0 auto 60px;
+    border: 1px solid #e2e8f0;
+}
+
+.form-row {
     margin-bottom: 20px;
-    font-size: 14px;
 }
 
-.profile-container hr {
-    margin: 30px 0;
-    border: none;
-    border-top: 1px solid #eee;
+.form-row label {
+    display: block;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 6px;
 }
 
-.profile-container small {
-    font-weight: normal;
-    color: #7f8c8d;
+.form-row input {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    background-color: #f9fafb;
+    transition: border-color 0.2s ease;
 }
 
-.profile-container button {
-    padding: 12px 24px;
-    background-color: #1abc9c;
+.form-row input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    background-color: #fff;
+}
+
+/* Toggle Password */
+.password-toggle {
+    cursor: pointer;
+    color: #3b82f6;
+    font-weight: 600;
+    margin: 10px 0 15px;
+    transition: 0.3s ease;
+}
+
+.password-toggle:hover {
+    text-decoration: underline;
+}
+
+.hidden-section {
+    display: none;
+    transition: all 0.3s ease;
+}
+
+.hidden-section.show {
+    display: block;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #10b981;
     color: white;
-    font-size: 16px;
     border: none;
-    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 15px;
+    border-radius: 6px;
     cursor: pointer;
     transition: background 0.3s ease;
-    width: 100%;
 }
 
-.profile-container button:hover {
-    background-color: #16a085;
+.btn-primary:hover {
+    background-color: #0f766e;
 }
 
-/* ────── 📱 Media Queries ────── */
-
-@media (max-width: 768px) {
-    .profile-container {
-        margin: 20px;
-        padding: 25px;
-    }
-
-    .profile-container h2 {
-        font-size: 22px;
-    }
-
-    .profile-container input {
-        font-size: 13px;
-        padding: 10px 12px;
-    }
-
-    .profile-container button {
-        font-size: 15px;
-        padding: 10px 20px;
-    }
+/* Success Message */
+.success-message {
+    background-color: #ecfdf5;
+    color: #065f46;
+    padding: 14px 20px;
+    border-left: 5px solid #10b981;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.03);
 }
 
-@media (max-width: 480px) {
-    .profile-container {
-        margin: 15px;
-        padding: 20px;
+/* Responsive */
+@media (max-width: 600px) {
+    .profile-form-card {
+        padding: 24px;
+        margin: 0 16px 50px;
     }
 
-    .profile-container h2 {
+    .dashboard-header h2 {
         font-size: 20px;
-    }
-
-    .profile-container label {
-        font-size: 14px;
-    }
-
-    .profile-container input {
-        font-size: 12px;
-        padding: 9px 10px;
-    }
-
-    .profile-container button {
-        font-size: 14px;
-        padding: 10px;
     }
 }

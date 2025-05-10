@@ -5,12 +5,13 @@
     box-sizing: border-box;
 }
 
-/* Navbar styles */
 .navbar {
     width: 100%;
     background: white;
     border-bottom: 1px solid #e0e0e0;
     font-family: 'League Spartan', sans-serif;
+    position: relative;
+    z-index: 999;
 }
 
 .nav-container {
@@ -18,7 +19,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 12px 24px;
-    position: relative;
+    flex-wrap: wrap;
 }
 
 /* Logo */
@@ -44,13 +45,14 @@
     color: #000;
 }
 
-/* Right-side: Dashboard & Logout */
+/* Right-side (desktop) */
 .nav-right {
     display: flex;
     gap: 16px;
     align-items: center;
 }
 
+/* Buttons */
 .dashboard-link {
     text-decoration: none;
     color: #333;
@@ -84,38 +86,56 @@
     border-color: transparent;
 }
 
-/* Hamburger (hidden on desktop) */
+/* Hamburger */
 .hamburger {
     display: none;
     font-size: 24px;
     cursor: pointer;
+    margin-left: 12px;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .nav-container {
-        flex-wrap: wrap;
-    }
-
-    .nav-links {
+    .nav-links,
+    .nav-right {
         display: none;
         flex-direction: column;
         width: 100%;
-        padding-top: 12px;
+        margin-top: 12px;
     }
 
-    .nav-links.show {
+    .nav-links.show,
+    .nav-right.show {
         display: flex;
-    }
-
-    .nav-right {
-        flex-direction: column;
-        align-items: flex-start;
-        width: 100%;
-        padding-top: 12px;
     }
 
     .hamburger {
         display: block;
     }
+
+    .nav-container {
+        align-items: flex-start;
+    }
+
+    .nav-links li,
+    .nav-right a,
+    .logout-form {
+        padding: 8px 0;
+    }
+}
+
+.nav-links li a.active {
+    font-weight: bold;
+    color: #10b981;
+    position: relative;
+}
+
+.nav-links li a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #10b981;
 }

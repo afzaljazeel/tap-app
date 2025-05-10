@@ -1,0 +1,143 @@
+/* My Bookings Page Styles */
+
+.section-heading {
+    text-align: center;
+    margin: 40px 0 20px;
+}
+
+.section-heading h1 {
+    font-size: 34px;
+    color: #222;
+    margin-bottom: 8px;
+}
+
+.section-heading p {
+    font-size: 16px;
+    color: #555;
+}
+
+/* Success Message */
+.success-message {
+    background-color: #d1fae5;
+    color: #065f46;
+    border: 1px solid #10b981;
+    padding: 12px 20px;
+    border-radius: 6px;
+    text-align: center;
+    margin: 20px auto;
+    max-width: 600px;
+    font-weight: 500;
+}
+
+.booking-list {
+    max-width: 900px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+}
+
+.booking-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    margin-bottom: 32px;
+    text-align: left;
+}
+
+.booking-card h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 12px;
+}
+
+.booking-card p {
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 6px;
+}
+
+/* Status Tracker */
+.status-tracker {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.status-step {
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: #e5e7eb; /* Light grey */
+    color: #555;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.status-step.active {
+    background: #10b981; /* Green */
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .section-heading h1 {
+        font-size: 24px;
+    }
+
+    .booking-card h3 {
+        font-size: 18px;
+    }
+
+    .booking-card p {
+        font-size: 14px;
+    }
+
+    .status-tracker {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .status-step {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+}
+.section-divider {
+    border: 0;
+    height: 4px;
+    width: 120px;
+    background-color: #10b981;
+    margin-bottom: 24px;
+}
+
+.sub-divider {
+    border: none;
+    height: 2px;
+    background-color: #10b981;
+    width: 100px;
+    margin: 6px 0 20px;
+}
+
+.align-left {
+    justify-content: flex-start !important;
+}
+
+.booking-list .booking-card {
+    margin-left: 0;
+}
+
+.card-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.full-divider {
+    border: none;
+    height: 2px;
+    background-color: #10b981;
+    margin: 30px 0;
+    width: 100%;
+}

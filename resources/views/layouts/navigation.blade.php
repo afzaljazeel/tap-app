@@ -16,10 +16,10 @@
 
         <ul class="nav-links" id="navLinks">
             @if(!$isDashboard)
-                <li><a href="{{ route('home') }}">Home</a></li>
-                <li><a href="{{ route('about') }}">About</a></li>
-                <li><a href="{{ route('guides') }}">Guides</a></li>
-                <li><a href="{{ route('locations') }}">Locations</a></li>
+            <li><a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
+            <li><a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">About</a></li>
+            <li><a href="{{ route('guides') }}" class="{{ request()->routeIs('guides') ? 'active' : '' }}">Guides</a></li>
+            <li><a href="{{ route('locations') }}" class="{{ request()->routeIs('locations') ? 'active' : '' }}">Locations</a></li>
             @endif
 
             @auth
@@ -32,7 +32,7 @@
 
         <!-- Right: Dashboard & Logout -->
         @auth
-        <div class="nav-right">
+        <div class="nav-right" id="navRight">
             @if(Auth::user()->role === 'admin')
                 <a href="{{ route('admin.dashboard') }}" class="dashboard-link">Dashboard</a>
             @elseif(Auth::user()->role === 'guide')
@@ -57,12 +57,9 @@
 <script>
     function toggleMenu() {
         const navLinks = document.getElementById('navLinks');
-        const userMenu = document.getElementById('userMenu');
+        const navRight = document.getElementById('navRight');
 
         navLinks.classList.toggle('show');
-
-        if (userMenu) {
-            userMenu.style.display = navLinks.classList.contains('show') ? 'flex' : 'none';
-        }
+        if (navRight) navRight.classList.toggle('show');
     }
 </script>

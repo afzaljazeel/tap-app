@@ -79,11 +79,23 @@ class GuideController extends Controller
     }
 
     public function canceledTours() {
-        return view('guide.canceled-tours');
+        $cancelled = Booking::with('tour', 'tourist')
+            ->where('guide_id', Auth::user()->guide->id)
+            ->where('status', 'Cancelled')
+            ->orderByDesc('date')
+            ->get();
+
+        return view('guide.canceled-tours', compact('cancelled'));
     }
 
     public function travelHistory() {
-        return view('guide.travel-history');
+        $completed = Booking::with('tour', 'tourist')
+            ->where('guide_id', Auth::user()->guide->id)
+            ->where('status', 'Completed')
+            ->orderByDesc('date')
+            ->get();
+
+        return view('guide.travel-history', compact('completed'));
     }
 
     public function support() {
@@ -210,7 +222,8 @@ public function storeTour(Request $request)
         $booking->status = 'Scheduled';
         $booking->save();
 
-        return back()->with('success', 'Booking approved successfully.');
+       return back()->with('success', 'Booking approved successfully.');
+
     }
 
     public function declineBooking(Request $request, $id)
@@ -229,7 +242,8 @@ public function storeTour(Request $request)
         $booking->notes = 'Declined: ' . $request->reason;
         $booking->save();
 
-        return back()->with('error', 'Booking declined.');
+      return back()->with('error', 'Booking declined.');
+
     }
 
     
@@ -327,18 +341,92 @@ public function storeTour(Request $request)
             return back()->with('success', 'Tour marked as completed and revenue recorded.');
         }
         // Show revenue details
-        public function revenue()
+       public function revenue(Request $request)
         {
             $guideId = Auth::user()->guide->id;
 
+            $months = Revenue::where('guide_id', $guideId)
+                ->selectRaw('DATE_FORMAT(date, "%Y-%m-01") as month')
+                ->distinct()
+                ->pluck('month')
+                ->sortDesc();
+
+            $selectedMonth = $request->query('month') ?? Carbon::now()->startOfMonth()->toDateString();
+
             $revenues = Revenue::where('guide_id', $guideId)
+                ->whereBetween('date', [
+                    Carbon::parse($selectedMonth)->startOfMonth(),
+                    Carbon::parse($selectedMonth)->endOfMonth()
+                ])
                 ->orderBy('date', 'desc')
                 ->get();
 
-            $totalIncome = $revenues->sum('income');
-            $totalCommission = $revenues->sum('commission');
-            $totalGuidePayment = $revenues->sum('guide_payment');
-
-            return view('guide.revenue', compact('revenues', 'totalIncome', 'totalCommission', 'totalGuidePayment'));
+            return view('guide.revenue', [
+                'revenues' => $revenues,
+                'months' => $months,
+                'selectedMonth' => $selectedMonth,
+                'totalIncome' => $revenues->sum('income'),
+                'totalCommission' => $revenues->sum('commission'),
+                'totalGuidePayment' => $revenues->sum('guide_payment'),
+            ]);
         }
+
+
+        //dahsboard method
+
+       
+        public function dashboard()
+{
+    $guide = auth()->user()->guide;
+
+    $newRequests = $guide->bookings()->where('status', 'Pending')->get();
+
+    $completedTours = $guide->bookings()->where('status', 'Completed')->get();
+
+    $upcomingTours = $guide->bookings()
+        ->where('status', 'Scheduled')
+        ->whereDate('date', '>=', Carbon::today())
+        ->get();
+
+    $ongoingTour = $guide->bookings()
+        ->where('status', 'Ongoing')
+        ->orderBy('date')
+        ->first();
+
+    // Enhanced "next24hrs" to consider preferred_time and time of day
+    $next24hrs = $guide->bookings()
+        ->where('status', 'Scheduled')
+        ->whereDate('date', Carbon::today())
+        ->get()
+        ->filter(function ($booking) {
+            $hour = now()->hour;
+
+            return match ($booking->preferred_time) {
+                'Morning' => $hour < 8,
+                'Evening' => $hour < 14,
+                'Night'   => $hour < 19,
+                default   => false,
+            };
+        });
+
+    $earnedThisMonth = Revenue::where('guide_id', $guide->id)
+        ->whereBetween('date', [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()])
+        ->sum('guide_payment');
+
+    return view('guide.dashboard', compact(
+        'newRequests',
+        'completedTours',
+        'upcomingTours',
+        'ongoingTour',
+        'next24hrs',
+        'earnedThisMonth'
+    ));
+}
+
+        public function viewPublicProfile($id)
+{
+    $guide = Guide::with('user')->findOrFail($id);
+    return view('guide.public-profile', compact('guide'));
+}
+
 }

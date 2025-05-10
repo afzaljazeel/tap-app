@@ -1,39 +1,72 @@
-@extends('layouts.app')
+@php
+    $route = Route::currentRouteName();
+@endphp
+
+@extends('layouts.admin')
+@section('title', 'Admin Profile')
 
 @section('content')
-    <!-- Link to the custom CSS file -->
-    <link rel="stylesheet" href="{{ asset('css/admin-profile.css') }}">
+<link rel="stylesheet" href="{{ asset('css/admin-profile.css') }}">
 
-    <div class="profile-container">
-        <h2>Admin Profile</h2>
+<div class="dashboard-header">
+    <h2>My Profile</h2>
+</div>
 
-        <form method="POST" action="{{ route('profile.update') }}">
-            @csrf
-            @method('PATCH')
+@if(session('status'))
+    <div class="success-message">{{ session('status') }}</div>
+@endif
 
-            <div>
-                <label for="name">Full Name</label>
-                <input type="text" id="name" name="name" value="{{ Auth::user()->name }}" required>
-            </div>
+<div class="profile-form-card">
+    <form method="POST" action="{{ route('profile.update') }}">
+        @csrf
+        @method('PATCH')
 
-            <div>
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" value="{{ Auth::user()->email }}" required>
-            </div>
+        <!-- Basic Info -->
+        <div class="form-row">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" value="{{ Auth::user()->name }}" required>
+        </div>
 
-            <hr>
+        <div class="form-row">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" value="{{ Auth::user()->email }}" required>
+        </div>
 
-            <div>
-                <label for="password">New Password <small>(Leave blank to keep current)</small></label>
+        <!-- Password Section -->
+
+        <div class="form-row">
+            <span class="password-toggle" onclick="togglePasswordSection()">+ Change Password</span>
+        </div>
+
+        <div id="passwordSection" class="hidden-section">
+            <div class="form-row">
+                <label for="password">New Password</label>
                 <input type="password" name="password" id="password">
             </div>
 
-            <div>
+            <div class="form-row">
                 <label for="password_confirmation">Confirm Password</label>
                 <input type="password" name="password_confirmation" id="password_confirmation">
             </div>
+        </div>
+        <button type="submit" class="btn-primary">Update Profile</button>
+    </form>
 
-            <button type="submit">Update Profile</button>
-        </form>
-    </div>
+    
+<script>
+    // Simple toggle
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggle = document.querySelector('.password-toggle');
+        const section = document.getElementById('password-section');
+        toggle.addEventListener('click', () => {
+            section.classList.toggle('show');
+        });
+    });
+
+    function togglePasswordSection() {
+        const section = document.getElementById('passwordSection');
+        section.classList.toggle('show');
+    }
+    
+</script>
 @endsection

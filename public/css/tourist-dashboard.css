@@ -150,8 +150,8 @@ body {
 .nav-links a {
     display: block;
     padding: 10px 16px;
-    background: linear-gradient(150deg, #5e3dbb, #4a90e2);
-    color: #fff;
+    background: linear-gradient(150deg, #efeeee, #e4e4e4);
+    color: #000000;
     border-radius: 6px;
     text-align: center;
     font-weight: 500;
@@ -162,7 +162,7 @@ body {
 }
 
 .nav-links a:hover {
-    background: linear-gradient(150deg, #3d6bb0, #2ecc71);
+    background: linear-gradient(150deg, #3d6bb0, #319a5d);
     color: #004d66;
     text-decoration: none;
 }
@@ -282,4 +282,45 @@ body {
 
 .back-btn:hover {
     color: #0056b3;
+}
+
+
+/* Footer Styles */
+.footer {
+    background-color: #10b981;
+    color: #fff;
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-logo {
+    width: 60px;
+    height: auto;
+    margin: 0 auto 12px;
+}
+
+.footer-slogan {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 12px;
+}
+
+.footer-contact,
+.footer-rights {
+    color: #000000;
+    font-size: 14px;
+}
+
+.footer-rights {
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.nav-links a.active {
+    background: linear-gradient(150deg, #3d6bb0, #2ecc71);
+    color: #fff;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }

@@ -1,19 +1,26 @@
-@php $showSidebar = true; @endphp
+@php
+    $showSidebar = true;
+    $route = Route::currentRouteName();
+@endphp
 
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Completed Tours')
 
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/guide-dashboard.css') }}">
 
+<!-- Header -->
 <div class="dashboard-header">
-    <h2>Completed Tours</h2>
+    <h2>✅ Completed Tours</h2>
     <p>All tours that were completed successfully.</p>
 </div>
 
+
+
+<!-- Table Section -->
 @if($bookings->count())
-    <div class="card">
+    <div class="card tour-table-card">
         <table class="calendar-table">
             <thead>
                 <tr>
@@ -28,11 +35,15 @@
             <tbody>
                 @foreach ($bookings as $booking)
                     <tr>
-                        <td>{{ $booking->date }}</td>
-                        <td>{{ $booking->preferred_time }}</td>
-                        <td>{{ $booking->tour->name }}</td>
-                        <td>{{ $booking->guide->user->name }}</td>
-                        <td>{{ $booking->tourist->name }}</td>
+                        <td>{{ \Carbon\Carbon::parse($booking->date)->format('M d, Y') }}</td>
+                        <td>
+                            <span class="badge-time {{ strtolower($booking->preferred_time) }}">
+                                {{ $booking->preferred_time }}
+                            </span>
+                        </td>
+                        <td>{{ $booking->tour->name ?? 'Tour Deleted' }}</td>
+                        <td>{{ $booking->guide->user->name ?? 'Guide Deleted' }}</td>
+                        <td>{{ $booking->tourist->name ?? 'Tourist Deleted' }}</td>
                         <td>${{ number_format($booking->tour->amount, 2) }}</td>
                     </tr>
                 @endforeach
@@ -40,6 +51,8 @@
         </table>
     </div>
 @else
-    <p>No completed tours found.</p>
+    <div class="card">
+        <p>No completed tours found.</p>
+    </div>
 @endif
 @endsection

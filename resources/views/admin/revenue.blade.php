@@ -1,34 +1,39 @@
 @php
-    $showSidebar = false;
+    $showSidebar = true;
+    $route = Route::currentRouteName();
 @endphp
 
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('title', 'Platform Revenue')
 
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/guide-dashboard.css') }}">
 
+<!-- Dashboard Header -->
 <div class="dashboard-header">
-    <h2>Platform Revenue</h2>
-    <p>View total income, commissions, and guide payouts.</p>
+    <h2>💰 Platform Revenue</h2>
+    <p>View total income, commissions, and payouts to guides.</p>
 </div>
 
+
+<!-- Revenue Summary -->
 <div class="revenue-summary">
     <div class="summary-card">
-        <h3>Total Income</h3>
-        <p>${{ number_format($totalIncome, 2) }}</p>
+        <h4>Total Income</h4>
+        <p class="count">${{ number_format($totalIncome, 2) }}</p>
     </div>
     <div class="summary-card">
-        <h3>Total Commission</h3>
-        <p>${{ number_format($totalCommission, 2) }}</p>
+        <h4>Total Commission</h4>
+        <p class="count">${{ number_format($totalCommission, 2) }}</p>
     </div>
     <div class="summary-card">
-        <h3>Total Guide Payout</h3>
-        <p>${{ number_format($totalGuidePayout, 2) }}</p>
+        <h4>Total Guide Payout</h4>
+        <p class="count">${{ number_format($totalGuidePayout, 2) }}</p>
     </div>
 </div>
 
+<!-- Revenue Table -->
 <div class="card">
     @if($revenues->count())
         <table class="calendar-table">
@@ -38,7 +43,7 @@
                     <th>Guide</th>
                     <th>Tourist</th>
                     <th>Tour</th>
-                    <th>Total Income</th>
+                    <th>Income</th>
                     <th>Commission</th>
                     <th>Guide Payment</th>
                 </tr>
@@ -46,10 +51,10 @@
             <tbody>
                 @foreach($revenues as $revenue)
                     <tr>
-                        <td>{{ $revenue->date }}</td>
-                        <td>{{ $revenue->guide->user->name ?? 'N/A' }}</td>
-                        <td>{{ $revenue->tourist->name ?? 'N/A' }}</td>
-                        <td>{{ $revenue->tour->name ?? 'N/A' }}</td>
+                        <td>{{ \Carbon\Carbon::parse($revenue->date)->format('M d, Y') }}</td>
+                        <td>{{ $revenue->guide->user->name ?? 'Guide Deleted' }}</td>
+                        <td>{{ $revenue->tourist->name ?? 'Tourist Deleted' }}</td>
+                        <td>{{ $revenue->tour->name ?? 'Tour Deleted' }}</td>
                         <td>${{ number_format($revenue->income, 2) }}</td>
                         <td>${{ number_format($revenue->commission, 2) }}</td>
                         <td>${{ number_format($revenue->guide_payment, 2) }}</td>

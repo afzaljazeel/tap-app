@@ -1,83 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+@extends('layouts.admin')
+@section('title', 'Dashboard')
 
-    <!-- Fonts & CSS -->
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/your-kit.js" crossorigin="anonymous"></script>
+@section('content')
 
-    <style>
-       
-    </style>
-</head>
-<body>
-
-  
-    <div class="admin-hero">
-        <img src="{{ asset('img/hero.jpg') }}" alt="Hero Background" class="hero-img">
-
-        <div class="hero-overlay">
-        <div class="hero-title">
-    <span class="hero-text">one</span>
-    <img src="{{ asset('img/logo_high_res.png') }}" alt="Tap Logo" class="hero-logo-img">
-    <span class="hero-text">away</span>
+<!-- Overview Title -->
+<div class="card dashboard-activity">
+    <h3>📊 Admin Overview</h3>
+    <p>Stay updated with what's happening across the platform.</p>
 </div>
 
-            <div class="search-bar">
-                <input type="text" placeholder="Search Guides">
-                <button><i class="fas fa-search"></i></button>
-            </div>
-        </div>
+<!-- Summary Cards -->
+<div class="summary-cards">
+    <div class="summary-card">
+        <h4>Total Guides</h4>
+        <p class="count" id="guideCount">{{ $guideCount ?? '...' }}</p>
     </div>
-
-    <!-- Sidebar + Content Wrapper -->
-    <div class="admin-wrapper">
-
-        <!-- Sidebar Navigation -->
-        <aside class="sidebar">
-            <div class="admin-avatar">
-                <img src="{{ asset('img/admin_avatar.jpg') }}" alt="Admin Avatar">
-                <span class="badge">Bronze level</span>
-            </div>
-            <nav class="sidebar-nav">
-                <a href="{{ route('admin.profile') }}">User Profile</a>
-                <a href="{{ route('admin.users') }}">Manage Users</a>
-                <a href="{{ route('admin.scheduledTours') }}">Scheduled Tours</a>
-                <a href="{{ route('admin.ongoingTours') }}">On going Tours</a>
-                <a href="{{ route('admin.canceledTours') }}">Canceled Tours</a>
-                <a href="{{ route('admin.completedTours') }}">Completed Tours</a>
-                <a href="{{ route('admin.revenue') }}"> Revenue</a>
-                <a href="{{ route('admin.reviews') }}">Reviews</a>
-
-            </nav>
-        </aside>
-
-        <main class="dashboard">
-    <div class="dashboard-header">
-        <h2>Welcome back, <span>Admin</span></h2>
-        <form method="POST" action="{{ route('logout') }}" class="logout-form">
-            @csrf
-            <button type="submit" class="logout-btn">Logout</button>
-        </form>
+    <div class="summary-card">
+        <h4>Scheduled Tours</h4>
+        <p class="count" id="scheduledCount">{{ $scheduled ?? '...' }}</p>
     </div>
-</main>
+    <div class="summary-card">
+        <h4>Ongoing Tours</h4>
+        <p class="count" id="ongoingCount">{{ $ongoing ?? '...' }}</p>
+    </div>
+    <div class="summary-card">
+        <h4>Completed Tours</h4>
+        <p class="count" id="completedCount">{{ $completed ?? '...' }}</p>
+    </div>
+    <div class="summary-card">
+        <h4>Total Revenue</h4>
+        <p class="count" id="revenueCount">${{ number_format($totalRevenue ?? 0, 2) }}</p>
+    </div>
+</div>
 
+<!-- Activity Feed -->
+<div class="card activity-card">
+    <h3>📢 Recent Booking Activity</h3>
 
-    <!-- Toast Message -->
-    <div id="toast" class="toast"></div>
+    @if($recentBookings->isEmpty())
+        <p>No recent bookings found.</p>
+    @else
+        <ul class="activity-list">
+            @foreach($recentBookings as $booking)
+                <li>
+                    <span class="activity-icon">📅</span>
+                    <span class="activity-text">
+                        <strong>{{ $booking->tourist->name ?? 'Deleted Tourist' }}</strong>
+                        booked <strong>{{ $booking->tour->name ?? 'Deleted Tour' }}</strong>
+                        with <strong>{{ $booking->guide->user->name ?? 'Deleted Guide' }}</strong>
+                        on {{ \Carbon\Carbon::parse($booking->date)->format('M d, Y') }}
+                        @if($booking->status)
+                            <span class="badge-status {{ strtolower($booking->status) }}">{{ $booking->status }}</span>
+                        @endif
+                    </span>
+                </li>
+            @endforeach
+        </ul>
+    @endif
+</div>
 
-    <script>
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            toast.innerText = message;
-            toast.style.background = type === 'error' ? '#e74c3c' : '#2ecc71';
-            toast.style.display = 'block';
-            setTimeout(() => toast.style.display = 'none', 3000);
-        }
-    </script>
-</body>
-</html>
+<!-- Fetch Counts Script -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        fetchCounts();
+    });
+
+   
+</script>
+
+@endsection
