@@ -1,0 +1,109 @@
+/* Container */
+.guide-profile-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    font-family: 'Inter', sans-serif;
+}
+
+/* Heading */
+.profile-heading {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #1e293b;
+}
+
+/* Section Titles */
+.form-section {
+    margin-bottom: 32px;
+}
+
+.form-section h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 6px;
+}
+
+/* Form Groups */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #334155;
+    font-size: 15px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    background: #f8fafc;
+    font-size: 14px;
+    transition: 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #4f46e5;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+/* Submit Button */
+.btn-primary {
+    background-color: #10b981;
+    color: #fff;
+    font-weight: 600;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    display: block;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.btn-primary:hover {
+    background-color: #0f766e;
+}
+
+/* Password Toggle Icon */
+.form-section h3 span#toggle-icon {
+    font-size: 16px;
+    margin-left: 6px;
+    color: #64748b;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .guide-profile-container {
+        padding: 20px;
+    }
+
+    .profile-heading {
+        font-size: 22px;
+    }
+
+    .btn-primary {
+        font-size: 14px;
+        padding: 10px 16px;
+    }
+}

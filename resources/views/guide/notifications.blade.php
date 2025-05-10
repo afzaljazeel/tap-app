@@ -1,5 +1,6 @@
 @php
-    $showSidebar = false;
+    $showSidebar = true;
+    $route = Route::currentRouteName();
 @endphp
 
 @extends('layouts.guide')
@@ -7,6 +8,19 @@
 @section('title', 'Booking Notifications')
 
 @section('content')
+
+@if (session('success'))
+    <div class="toast toast-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="toast toast-error">
+        {{ session('error') }}
+    </div>
+@endif
+
 <link href="{{ asset('css/guide-notification.css') }}" rel="stylesheet">
 
 <div class="dashboard-section">
@@ -24,18 +38,18 @@
                     <p><strong>Time:</strong> {{ $booking->preferred_time }}</p>
                     <p><strong>Notes:</strong> {{ $booking->notes ?? 'N/A' }}</p>
 
-                    <form action="{{ route('guide.booking.approve', $booking->id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        <button type="submit" class="btn-primary">Approve</button>
-                    </form>
+                    <div class="actions">
+                        <form action="{{ route('guide.booking.approve', $booking->id) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn-primary">Approve</button>
+                        </form>
 
-                    <!-- Decline with Reason (Modal-like inline) -->
-                    <form action="{{ route('guide.booking.decline', $booking->id) }}" method="POST" style="display:inline; margin-left: 10px;">
-                        @csrf
-                        <input type="text" name="reason" placeholder="Reason for decline" required style="padding: 4px; width: 160px;">
-                        <button type="submit" class="btn-danger">Decline</button>
-                    </form>
-
+                        <form action="{{ route('guide.booking.decline', $booking->id) }}" method="POST">
+                            @csrf
+                            <input type="text" name="reason" placeholder="Reason for decline" required>
+                            <button type="submit" class="btn-danger">Decline</button>
+                        </form>
+                    </div>
                 </div>
             @endforeach
         </div>

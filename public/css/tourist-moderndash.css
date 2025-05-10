@@ -1,0 +1,249 @@
+/* General Style Unifier */
+body {
+    background-color: #f3f4f6;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+}
+
+/* Header and Section Titles */
+.dashboard-header {
+    text-align: left;
+    padding: 20px;
+}
+
+.dashboard-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #111;
+    margin-top: -4px; /* or 0 if you want no gap at all */
+}
+
+.sub-text {
+    font-size: 16px;
+    color: #555;
+    margin-top: 8px;
+}
+
+/* Reusable Card */
+.card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    margin-bottom: 30px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Profile Form Styling */
+.form-grid {
+    display: grid;
+    gap: 16px;
+}
+
+.form-grid label {
+    font-weight: 600;
+    color: #444;
+}
+
+.form-grid input,
+.form-grid textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+    background-color: #f9fafb;
+}
+
+.form-grid input:focus,
+.form-grid textarea:focus {
+    border-color: #10b981;
+    background-color: white;
+    outline: none;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #10b981;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0f766e;
+}
+
+.back-btn {
+    color: #007bff;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.back-btn:hover {
+    text-decoration: underline;
+}
+
+/* Success Message */
+.success-message {
+    background-color: #ecfdf5;
+    color: #065f46;
+    padding: 12px 20px;
+    border-left: 4px solid #10b981;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+/* Booking Tracker */
+.booking-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 1000px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+}
+
+.booking-track-card {
+    width: 100%;
+    box-sizing: border-box;
+}
+.booking-track-card h3 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #111;
+    margin-bottom: 10px;
+}
+
+.status-tracker {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+}
+
+.status-step {
+    background-color: #d1d5db;
+    color: #374151;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.status-step.active {
+    background-color: #10b981;
+    color: white;
+}
+
+/* Booking Cards in History */
+.booking-card {
+    list-style: none;
+}
+
+.card-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.status.completed {
+    background-color: #e6f7ec;
+    color: #166534;
+    padding: 6px 12px;
+    border-radius: 999px;
+    display: inline-block;
+    font-weight: 600;
+}
+
+.status.cancelled {
+    background-color: #fee2e2;
+    color: #991b1b;
+    padding: 6px 12px;
+    border-radius: 999px;
+    display: inline-block;
+    font-weight: 600;
+}
+
+.full-divider {
+    border: none;
+    height: 2px;
+    background-color: #10b981;
+    margin: 40px auto;
+    width: 95%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dashboard-header h1 {
+        font-size: 24px;
+    }
+
+    .card {
+        padding: 20px;
+        margin: 0 16px 30px;
+    }
+
+    .status-tracker {
+        justify-content: center;
+    }
+}
+
+
+/* Footer Styles */
+.footer {
+    margin-top: 20px;
+    background-color: #10b981;
+    color: #fff;
+    text-align: center;
+    padding: 40px 20px;
+    border-radius: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-logo {
+    width: 60px;
+    height: auto;
+    margin: 0 auto 12px;
+}
+
+.footer-slogan {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 12px;
+}
+
+.footer-contact,
+.footer-rights {
+    color: #000000;
+    font-size: 14px;
+}
+
+.footer-rights {
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+/* Booking Card Full Width */
+.booking-track-card {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Status Steps (already exists) — extend to add cancelled variation */
+.status-step.cancelled {
+    background-color: #d1d5db; /* Default grey */
+    color: #374151;
+}
+
+.status-step.cancelled.active {
+    background-color: #ff0101; /* Red background */
+    color: #fdfdfd;
+}

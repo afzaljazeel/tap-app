@@ -18,4 +18,15 @@
         </a>
     @endforeach
 </div>
+
+<!-- Footer Section -->
+<footer class="footer">
+    <div class="footer-content">
+        <img src="{{ asset('img/logo_high_res.png') }}" alt="Tap Logo" class="footer-logo">
+        <p class="footer-slogan">Your Dream Tour, One Tap Away.</p>
+        <p class="footer-contact">Contact: info@tapaguide.com</p>
+        <p class="footer-rights">© 2025 Tap A Guide | All Rights Reserved</p>
+    </div>
+</footer>
+
 @endsection

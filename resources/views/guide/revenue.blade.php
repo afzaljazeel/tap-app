@@ -1,5 +1,6 @@
 @php
-    $showSidebar = false;
+    $showSidebar = true;
+    use Illuminate\Support\Carbon;
 @endphp
 
 @extends('layouts.guide')
@@ -10,10 +11,23 @@
 <link rel="stylesheet" href="{{ asset('css/guide-dashboard.css') }}">
 
 <div class="dashboard-header">
-    <h2>My Revenue Overview</h2>
-    <p>Track your total earnings and commissions from completed tours.</p>
+    <h2>📊 My Revenue</h2>
+    <p>Track your earnings and commissions by month.</p>
 </div>
 
+<!-- Month Filter -->
+<form method="GET" class="filter-form" style="margin-bottom: 20px;">
+    <label for="month">Select Month:</label>
+    <select name="month" id="month" onchange="this.form.submit()" class="month-select">
+        @foreach ($months as $month)
+            <option value="{{ $month }}" {{ $selectedMonth === $month ? 'selected' : '' }}>
+                {{ \Carbon\Carbon::parse($month)->format('F Y') }}
+            </option>
+        @endforeach
+    </select>
+</form>
+
+<!-- Summary -->
 <div class="revenue-summary">
     <div class="summary-card">
         <h3>Total Income</h3>
@@ -31,7 +45,7 @@
 
 <hr>
 
-<h3>Recent Completed Tours</h3>
+<h3>Completed Tours - {{ \Carbon\Carbon::parse($selectedMonth)->format('F Y') }}</h3>
 @if ($revenues->count())
     <table class="calendar-table">
         <thead>
@@ -58,6 +72,6 @@
         </tbody>
     </table>
 @else
-    <p>No revenue records yet.</p>
+    <p>No revenue for this month.</p>
 @endif
 @endsection

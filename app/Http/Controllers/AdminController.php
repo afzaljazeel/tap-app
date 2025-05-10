@@ -11,9 +11,31 @@ use Illuminate\Validation\Rules;
 
 class AdminController extends Controller
 {
-    public function dashboard() {
-        return view('admin.dashboard');
-    }
+    public function dashboard()
+{
+    $guideCount = \App\Models\Guide::count();
+    $scheduled = \App\Models\Booking::where('status', 'Scheduled')->count();
+    $ongoing = \App\Models\Booking::where('status', 'Ongoing')->count();
+    $completed = \App\Models\Booking::where('status', 'Completed')->count();
+    $totalRevenue = \App\Models\Revenue::sum('income');
+
+    // Recent bookings (last 5)
+    $recentBookings = \App\Models\Booking::with(['tour', 'guide.user', 'tourist'])
+        ->latest()
+        ->take(5)
+        ->get();
+
+    return view('admin.dashboard', compact(
+        'guideCount',
+        'scheduled',
+        'ongoing',
+        'completed',
+        'totalRevenue',
+        'recentBookings'
+    ));
+}
+
+
 
     public function manageUsers() {
         return view('admin.users'); // ✅ loads the tab view
