@@ -366,6 +366,7 @@ html {
 }
 
 .btn-primary {
+    text-decoration: none;
     background-color: var(--primary);
     color: white;
 }
@@ -737,11 +738,16 @@ html {
 }
 
 .badge-time.morning {
-    background-color: #38bdf8; /* Blue */
+    background-color: #38bdf8;
+    /* Blue */
 }
+
 .badge-time.evening {
-    background-color: #f59e0b; /* Amber */
+    background-color: #f59e0b;
+    /* Amber */
 }
+
 .badge-time.night {
-    background-color: #8b5cf6; /* Violet */
+    background-color: #8b5cf6;
+    /* Violet */
 }
