@@ -27,6 +27,7 @@
             <nav style="margin-top: 30px;">
                 <ul style="list-style: none; padding: 0;">
                     <li><a href="{{ route('guide.dashboard') }}" class="{{ $route === 'guide.dashboard' ? 'active' : '' }}">Dashboard</a></li>
+                    <li><a href="{{ route('guide.tours') }}" class="{{ $route === 'guide.tours' ? 'active' : '' }}">Tours</a></li>
                     <li><a href="{{ route('guide.profile') }}" class="{{ $route === 'guide.profile' ? 'active' : '' }}">User Profile</a></li>
                     <li><a href="{{ route('guide.notifications') }}" class="{{ $route === 'guide.notifications' ? 'active' : '' }}">Notifications</a></li>
                     <li><a href="{{ route('guide.calendar') }}" class="{{ $route === 'guide.calendar' ? 'active' : '' }}">My Calendar</a></li>

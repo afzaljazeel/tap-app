@@ -1,5 +1,5 @@
 @php
-    $showSidebar = false;
+    $showSidebar = true;
 @endphp
 
 @extends('layouts.guide')

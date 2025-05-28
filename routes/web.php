@@ -86,6 +86,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
         Route::get('/guides', [AdminController::class, 'getGuides'])->name('admin.guides');
         Route::post('/guides', [AdminController::class, 'addGuide'])->name('admin.addGuide');
         Route::delete('/guides/{id}', [AdminController::class, 'deleteGuide'])->name('admin.deleteGuide');
+        
 
         // Tourist Routes
         Route::get('/tourists', [AdminController::class, 'getTourists'])->name('admin.tourists');
@@ -127,7 +128,7 @@ Route::middleware(['auth', 'guide'])->prefix('guide')->group(function () {
     Route::post('/guide/bookings/{id}/decline', [GuideController::class, 'declineBooking'])->name('guide.booking.decline');
     Route::get('/calendar', [GuideController::class, 'calendar'])->name('guide.calendar');
     Route::post('/bookings/{id}/start', [GuideController::class, 'startTour'])->name('guide.booking.start');
-
+    Route::post('/guide/bookings/{id}/cancel', [GuideController::class, 'cancel'])->name('guide.booking.cancel');    
     Route::post('/bookings/{id}/complete', [GuideController::class, 'completeTour'])->name('guide.booking.complete');
 
 

@@ -8,6 +8,9 @@
     <!-- Include Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="{{ asset('css/homepage.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/guide-dashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/guide-tours.css') }}">
+
 </head>
 
 <body class="font-sans bg-gray-50">

@@ -7,6 +7,7 @@
 
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/guide-calendar.css') }}">
+<link rel="stylesheet" href="{{ asset('css/guide-dashboard.css') }}">
 
 <div class="dashboard-header">
     <h2>❌ Canceled Tours</h2>
