@@ -24,7 +24,7 @@
                     <h3>{{ $tour->name }}</h3>
                     <p><strong>Amount:</strong> ${{ $tour->amount }}</p>
                     <p><strong>Duration:</strong> {{ $tour->duration }}</p>
-                    <form method="POST" action="#">
+                    <form method="POST" action="{{ route('guide.tours.destroy', $tour->id) }}">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="delete-btn">Delete</button>

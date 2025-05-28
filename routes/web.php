@@ -119,6 +119,8 @@ Route::middleware(['auth', 'guide'])->prefix('guide')->group(function () {
     Route::get('/tours', [GuideController::class, 'myTours'])->name('guide.tours');
     Route::get('/tours/create', [GuideController::class, 'createTour'])->name('guide.tours.create');
     Route::post('/tours/store', [GuideController::class, 'storeTour'])->name('guide.tours.store');
+    Route::delete('guide/tours/{id}', [GuideController::class, 'destroy'])->name('guide.tours.destroy');
+
 
     // Bookings
     Route::get('/tours/ongoing', [GuideController::class, 'ongoingTours'])->name('guide.ongoingTours');

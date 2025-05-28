@@ -8,6 +8,11 @@
     <!-- Fonts & Styles -->
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Sidebar Toggle Button -->
+<button class="sidebar-toggle" onclick="document.body.classList.toggle('sidebar-open')">
+    ☰
+</button>
+
 </head>
 <body>
 

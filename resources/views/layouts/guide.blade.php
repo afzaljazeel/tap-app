@@ -12,6 +12,10 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/guide-dashboard.css') }}">
     <link rel="stylesheet" href="{{ asset('css/guide-tours.css') }}">
+    <!-- Hamburger toggle -->
+<button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+
+
 </head>
 <body>
     <div class="dashboard-container" style="display: flex; min-height: 100vh;">
@@ -100,4 +104,12 @@
         }
     </style>
 </body>
+
+<script>
+    function toggleSidebar() {
+        document.body.classList.toggle('sidebar-open');
+    }
+</script>
+
+
 </html>

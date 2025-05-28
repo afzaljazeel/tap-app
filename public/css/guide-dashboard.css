@@ -751,3 +751,47 @@ html {
     background-color: #8b5cf6;
     /* Violet */
 }
+
+/* Hide sidebar by default on small screens */
+@media (max-width: 768px) {
+    .sidebar {
+        position: absolute;
+        top: 64px; /* adjust based on your navbar height */
+        left: 0;
+        width: 240px;
+        height: calc(100vh - 64px);
+        background: white;
+        z-index: 1000;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* When sidebar-open class is added to body */
+    body.sidebar-open .sidebar {
+        transform: translateX(0);
+    }
+
+    /* Add padding to main content when sidebar is open */
+    body.sidebar-open .dashboard {
+        padding-top: 80px;
+    }
+
+    /* Show hamburger */
+    .sidebar-toggle {
+        display: inline-block;
+        cursor: pointer;
+        padding: 10px 15px;
+        font-size: 24px;
+        background: none;
+        border: none;
+        color: #333;
+    }
+}
+
+/* Hide toggle on desktop */
+@media (min-width: 769px) {
+    .sidebar-toggle {
+        display: none;
+    }
+}

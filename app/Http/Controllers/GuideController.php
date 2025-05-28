@@ -207,7 +207,19 @@ public function storeTour(Request $request)
       return redirect()->route('guide.tours.index')->with('success', 'Tour created successfully!');
   }
 
+    public function destroy($id)
+    {
+        $tour = Tour::findOrFail($id);
 
+        // Optional: Check if the logged-in guide owns this tour
+        if ($tour->guide_id !== auth()->user()->guide->id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $tour->delete();
+
+        return redirect()->route('guide.tours')->with('success', 'Tour deleted successfully.');
+    }
 
   // Bookings
 

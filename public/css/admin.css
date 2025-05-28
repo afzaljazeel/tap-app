@@ -361,3 +361,94 @@ html {
 .dashboard-section {
     padding: 30px 0;
 }
+
+/* ======================== */
+/* RESPONSIVE MEDIA QUERIES */
+/* ======================== */
+
+/* Tablet & below */
+@media (max-width: 768px) {
+    .admin-wrapper {
+        flex-direction: column;
+    }
+
+    /* Sidebar collapses off screen */
+    .sidebar {
+        position: absolute;
+        top: 60px; /* adjust if header is taller */
+        left: 0;
+        width: 240px;
+        height: calc(100vh - 60px);
+        background: white;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        z-index: 1000;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Show sidebar when body has class .sidebar-open */
+    body.sidebar-open .sidebar {
+        transform: translateX(0);
+    }
+
+    .sidebar-toggle {
+        display: inline-block;
+        font-size: 24px;
+        background: none;
+        border: none;
+        padding: 12px 20px;
+        cursor: pointer;
+        color: #333;
+        z-index: 1001;
+    }
+
+    .dashboard {
+        padding: 20px;
+    }
+
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .summary-cards {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .summary-card {
+        min-width: 100%;
+    }
+
+    .activity-card {
+        padding: 20px;
+    }
+}
+
+/* Phones & small devices */
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 20px;
+    }
+
+    .hero-logo-img {
+        width: 40px;
+    }
+
+    .summary-card h4 {
+        font-size: 14px;
+    }
+
+    .summary-card .count {
+        font-size: 22px;
+    }
+
+    .activity-list li {
+        font-size: 14px;
+    }
+
+    .dashboard-header h2 {
+        font-size: 20px;
+    }
+}
